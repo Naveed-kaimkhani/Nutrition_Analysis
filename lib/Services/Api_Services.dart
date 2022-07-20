@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:nutritionanalysis/model/Response_Model.dart';
+
 import '../model/Meal.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,14 +12,18 @@ static String parameter="&maxFat=100&maxProtein=100&maxCarbs=200&number=10&apiKe
 
 //https://api.spoonacular.com/recipes/complexSearch?query=Pasta%20With%20Tuna&maxFat=100&maxProtein=100&maxCarbs=200&number=10&apiKey=c020b400a8244106a0b807006800605b
 
- static Future<Meal?> getMeal({String? query}) async {
+ static Future<Response_Model?> getMeal({String? query}) async {
     try {
       http.Response response = await http.get(Uri.parse('$baseUrl$query$parameter$ApiKey'));
       print(response.body);
-         var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-         print(jsonResponse);
-      return Meal.fromjson(jsonResponse);
+      print("response.body printed");
+         Response_Model response_model = jsonDecode(response.body);
+         print("jsonDecode function");
+          print(response_model.results);
+        // print(jsonResponse);
+      //return Meal.fromjson(jsonResponse);
     } catch (e) {
+      print("getMeal func exception");
       print(e.toString());
     }
   }

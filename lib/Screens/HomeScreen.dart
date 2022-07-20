@@ -13,6 +13,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    Api_Services.getMeal(query: "Chicken");
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey,
@@ -27,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Button(function: () {}, text: "Recipes"),
+                Button(function: (){}, text: "Recipes"),
                 Button(function: () {}, text: "Food Item"),
                 Button(function: () {}, text: "Add your own food"),
               ],
@@ -46,41 +51,41 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                height: 50,
-                width: 250,
-                color: Colors.white,
-                child: TypeAheadField<Meal>(
-                  suggestionsCallback: (pattern) =>
-                      Api_Services.getMealSuggestion(query: pattern),
-                  itemBuilder: (context, Meal? suggestion) {
-                    final Meal = suggestion!;
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     Container(
+          //       height: 50,
+          //       width: 250,
+          //       color: Colors.white,
+          //       child: TypeAheadField<Meal>(
+          //         suggestionsCallback: (pattern) =>
+          //             Api_Services.getMealSuggestion(query: pattern),
+          //         itemBuilder: (context, Meal? suggestion) {
+          //           final Meal = suggestion!;
 
-                    return ListTile(
-                      title: Text(Meal.title!),
-                    );
-                  },
-                  onSuggestionSelected: (Meal? suggestion) {
-                    //this function will execute when user clicks on suggested meal
+          //           return ListTile(
+          //             title: Text(Meal.title!),
+          //           );
+          //         },
+          //         onSuggestionSelected: (Meal? suggestion) {
+          //           //this function will execute when user clicks on suggested meal
 
-                    final meal =
-                        suggestion!; //Do processing on this meal object
-                    print("Fat: ${meal.fat.toString()}");
-                    print("Protein: ${meal.protein.toString()}");
-                    print("Fat: ${meal.carbs.toString()}");
-                  },
-                  noItemsFoundBuilder: (context) => const Center(
-                    child: Text("No Meal Found"),
-                  ),
-                  debounceDuration: Duration(milliseconds: 500),
-                ),
-              ),
-              Button(function: () {}, text: "Search"),
-            ],
-          ),
+          //           final meal =
+          //               suggestion!; //Do processing on this meal object
+          //           print("Fat: ${meal.fat.toString()}");
+          //           print("Protein: ${meal.protein.toString()}");
+          //           print("Fat: ${meal.carbs.toString()}");
+          //         },
+          //         noItemsFoundBuilder: (context) => const Center(
+          //           child: Text("No Meal Found"),
+          //         ),
+          //         debounceDuration: Duration(milliseconds: 500),
+          //       ),
+          //     ),
+          //     Button(function: () {}, text: "Search"),
+          //   ],
+          // ),
         ],
       ),
     );
