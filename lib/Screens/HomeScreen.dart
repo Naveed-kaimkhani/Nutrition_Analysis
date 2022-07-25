@@ -3,7 +3,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import '../Components/Button.dart';
 import '../Services/Api_Services.dart';
-import '../model/Meal.dart';
+import '../model/Response_Model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,7 +13,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
+  double? carbs;
+  double? protein;
+  double? fats;
   
   @override
   Widget build(BuildContext context) {
@@ -57,24 +59,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 250,
                 color: Colors.white,
       
-                child: TypeAheadField<Meal?>(
+                child: 
+                TypeAheadField<Results>(
       
       suggestionsCallback: (pattern) =>
           Api_Services.getMealSuggestion(query: pattern),
 
-      itemBuilder: (context, Meal? suggestion) {
-          final meal=suggestion!;
+      itemBuilder: (context, Results suggestion) {
+          final meal=suggestion;
         return ListTile(
-          title: Text(meal.title!),
+          title: Card(child: Text(meal.title!)),
         );
       },
-      onSuggestionSelected: (Meal? suggestion) {
+      onSuggestionSelected: (Results suggestion) {
+        List<Nutrients>? nutrients=suggestion.nutrition!.nutrients;
+        print("in on suggeston");
+         protein=nutrients![0].amount!;
+         fats=nutrients[1].amount!;
+         carbs=nutrients[2].amount!;
+         
+        print("protein: ${protein.toString()}");
+        print("fats: ${fats.toString()}");
+        print("carbs: ${carbs.toString()}");
         //this function will execute when user clicks on suggested meal
 },
       noItemsFoundBuilder: (context) => const Center(
         child: Text("No Meal Found"),
       ),
-      debounceDuration:const Duration(milliseconds: 500),
+      debounceDuration:const Duration(milliseconds: 400),
     ),
               ),
   

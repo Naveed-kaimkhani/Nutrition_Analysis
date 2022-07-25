@@ -1,6 +1,6 @@
 import 'dart:convert';
-import '../model/Meal.dart';
 import 'package:http/http.dart' as http;
+import 'package:nutritionanalysis/model/Response_Model.dart';
 
 class Api_Services {
   static String baseUrl =
@@ -12,16 +12,20 @@ class Api_Services {
 //https://api.spoonacular.com/recipes/complexSearch?query=Pasta%20With%20Tuna&maxFat=100&maxProtein=100&maxCarbs=200&number=10&apiKey=c020b400a8244106a0b807006800605b
 
   //this function will provide all suggestions
-  static Future<List<Meal>> getMealSuggestion({String? query}) async {
+  static Future<List<Results>> getMealSuggestion({String? query}) async {
+  
     http.Response response =
         await http.get(Uri.parse('$baseUrl$query$parameter$ApiKey'));
-    print(response.body); //Showing all json data
     if (response.statusCode == 200) {
-      final List Meals =
+      print("ab tk koii error nh");
+     var meals =
           json.decode(response.body); //  Meals will have data in Map
-      return Meals.map((json) => Meal.fromjson(json))
-          .toList(); //converting each Map in Meal object and returning list of Meal
+       // print(meals);
+          Response_Model RM=Response_Model.fromJson(meals);
+          List<Results> results=RM.results!;
 
+        return RM.results!;
+      
     } else {
       throw Exception();
     }

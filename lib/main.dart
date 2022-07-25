@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nutritionanalysis/Screens/HomeScreen.dart';
-
 void main() {
   runApp(const MyApp());
 }
