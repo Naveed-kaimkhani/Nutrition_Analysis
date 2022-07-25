@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
@@ -15,14 +14,14 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 50,
-        width: 100,
+        width: 120,
         color: Colors.black,
         child: GestureDetector(
           onTap: function,
           child: Center(
             child: Text(
               text!,
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle(color: Colors.white, fontSize: 18),
             ),
           ),
         ));

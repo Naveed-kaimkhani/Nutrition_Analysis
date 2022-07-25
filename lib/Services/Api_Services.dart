@@ -13,19 +13,13 @@ class Api_Services {
 
   //this function will provide all suggestions
   static Future<List<Results>> getMealSuggestion({String? query}) async {
-  
     http.Response response =
         await http.get(Uri.parse('$baseUrl$query$parameter$ApiKey'));
     if (response.statusCode == 200) {
-      print("ab tk koii error nh");
-     var meals =
-          json.decode(response.body); //  Meals will have data in Map
-       // print(meals);
-          Response_Model RM=Response_Model.fromJson(meals);
-          List<Results> results=RM.results!;
-
-        return RM.results!;
+      var meals = json.decode(response.body);    
+      Response_Model RM = Response_Model.fromJson(meals);
       
+      return RM.results!;
     } else {
       throw Exception();
     }
