@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),
                         child: Button(function: () {}, text: "Add new Item"),
                       ),
-                      SizedBox(
+                    const  SizedBox(
                         height: 38,
                       ),
                       Text(

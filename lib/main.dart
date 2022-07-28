@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nutritionanalysis/Screens/Add_New_Item_Screen.dart';
-import 'package:nutritionanalysis/Screens/HomeScreen.dart';
+
+import 'package:nutritionanalysis/Screens/TabBarScreen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: HomeScreen(),
+      home: TabBarScreen(),
     );
   }
 }
