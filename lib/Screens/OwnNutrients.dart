@@ -21,6 +21,9 @@ class OwnNutrients extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             inputfields(
+                hint_text: "Enter Food Name", controller: caloreisController),
+                k,
+                    inputfields(
                 hint_text: "Enter Calories", controller: caloreisController),
             k,
             inputfields(hint_text: "Enter Carb", controller: carbController),

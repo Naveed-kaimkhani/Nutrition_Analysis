@@ -18,12 +18,6 @@ class _Search_by_foodItemState extends State<Search_by_foodItem> {
   double? fats;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  //  Api_Services.getFoodNutrition(id: "9266");
-  }
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey,

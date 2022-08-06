@@ -1,5 +1,7 @@
 
 //To get food suggestions
+import 'package:nutritionanalysis/model/NutrientsModel.dart';
+
 class Food_Item {
   List<FoodResults>? results;
  
@@ -30,4 +32,5 @@ class FoodResults {
     name = json['name'];
     image = json['image'];
   }
+
 }

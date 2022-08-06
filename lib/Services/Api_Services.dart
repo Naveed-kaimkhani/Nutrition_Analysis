@@ -76,7 +76,7 @@ class Api_Services {
 
 
 
-  static Future<List<String>> getRecipeNutrition({String? title}) async {
+  static Future<RecipeInfo> getRecipeNutrition({String? title}) async {
 //https://api.spoonacular.com/recipes/guessNutrition?title=Chicken%2065&apiKey=c020b400a8244106a0b807006800605b
    String baseUrl="https://api.spoonacular.com/recipes/guessNutrition?title=";   
     
@@ -84,14 +84,15 @@ class Api_Services {
         await http.get(Uri.parse('$baseUrl$title${"&apiKey="}$ApiKey'));
     if (response.statusCode == 200) {
       var recipeNutrients = json.decode(response.body);    
-      print(recipeNutrients);
+      print("sub set hy");
+    //  print(recipeNutrients);
       RecipeInfo food_info = RecipeInfo.fromJson(recipeNutrients);
       double? calories= food_info.calories!.value;
         double? carb= food_info.carbs!.value;
-        print("kljlkjljljljldjfldiofjoejfioeje");
         print(calories);
         print(carb);
-      return ["jlj","kjlj"];
+        print("set");
+      return food_info;
     } else {
       throw Exception();
     }

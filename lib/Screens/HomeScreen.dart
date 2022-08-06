@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nutritionanalysis/Components/Button.dart';
+import 'package:nutritionanalysis/Screens/TabBarScreen.dart';
+import 'package:nutritionanalysis/Services/NutrientsController.dart';
+
+import '../Services/Api_Services.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  
+ HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> today_food=["fdfd","fdfsdfs","fdfsfsd"];
+  double? calories;
+  var _Nutrients=Get.put(NutrientsController());  
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double cal = 0;
-    double carb = 0;
-    List<String>? today_food;
-    List<String> ls = [
-      "Chicken",
-      "Chicken",
-      "Chicken",
-      "Chicken",
-      "Chicken",
-      "Tea",
-      "Tea",
-      "Tea",
-      "Tea",
-      "Tea"
-    ];
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -45,29 +39,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     // mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Calories: $cal",
-                        style: TextStyle(
+                      Obx((){
+                        
+                        return Text(
+                       // _Nutrients.carbs
+                        "Calories: ${_Nutrients.calories.toString()}",
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
+                      );
+                      }),
+                      
                       const SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        "Carbs: $carb",
-                        style: TextStyle(
+                      Obx((){
+                        
+                        return Text(
+                       // _Nutrients.carbs
+                        "Carbs: ${_Nutrients.carbs.toString()}",
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
+                      );
+                      }),
                       const SizedBox(
                         height: 30,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),
-                        child: Button(function: () {}, text: "Add new Item"),
+                        child: Button(function: () {
+                          Get.to(()=>TabBarScreen());
+                        }, text: "Add new Item"),
                       ),
                     const  SizedBox(
                         height: 38,
@@ -99,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.grey,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(ls[index]),
+                                  child: Text("jjhjkh"),
                                 ),
                               ),
                           );
