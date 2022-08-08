@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:get/get.dart';
 import 'package:nutritionanalysis/model/RecipeInfo.dart';
 
 import '../Components/Button.dart';
@@ -21,7 +22,7 @@ class _Search_By_RecipesState extends State<Search_By_Recipes> {
   // double? fats;
   
   List<String>? ListOfTodaysFood;
-  NutrientsController _nutrientsController=NutrientsController();
+  var _Nutrients=Get.put(NutrientsController());  
 @override
   void initState() {
     // TODO: implement initState
@@ -102,9 +103,9 @@ NutrientsModel _model=NutrientsModel(calories: 0, carb: 0, titles: [""]);
                       _model.carb=rc.carbs!.value;
                       ListOfTodaysFood!.add(suggestion.title??"");
                    _model.titles=ListOfTodaysFood;
-                await  _nutrientsController.addNutrition(nutrients: _model);
-                  _nutrientsController.getNutrients();
-                  
+                await  _Nutrients.addNutrition(nutrients: _model);
+                _Nutrients.getNutrients();
+                  print("get function called after add");
                       print(rc);
                     // print("protein: ${protein.toString()}");
                     // print("fats: ${fats.toString()}");
@@ -126,7 +127,7 @@ NutrientsModel _model=NutrientsModel(calories: 0, carb: 0, titles: [""]);
   }
 
    gettitles()async{
-    ListOfTodaysFood=await NutrientsController.getTodaysTitles();
+    ListOfTodaysFood=await _Nutrients.getTodaysTitles();
  
   }
 }

@@ -1,13 +1,14 @@
+import 'package:get/get.dart';
 import 'package:nutritionanalysis/Services/NutrientsController.dart';
 import 'package:nutritionanalysis/model/NutrientsModel.dart';
 import 'package:sqflite/sqflite.dart';
-import 'dart:convert';
 
 class DbHelper {
   static Database? db;
   static final int _version = 1;
   static final String _tablename = "Nutrients";
-
+ static var _Nutrients=Get.put(NutrientsController());  
+ 
   static Future<void> initDb() async {
     if (db != null) {
       
@@ -46,10 +47,14 @@ static Future<List<Map<String, Object?>>> queryRow(int id) async {
 
 static Future<int> update({NutrientsModel? nutrientsModel}){
         //String titless=jsonEncode(nutrientsModel!.titles);
-       String titless=nutrientsModel!.titles!.join(',');
-       var res=db!.update(_tablename,{"calories":nutrientsModel.calories,"carb":nutrientsModel.carb,"titles":titless},where: "id = ?",whereArgs: [1]);
+     //  double cal=_Nutrients.caloriess
+        double newCalories=_Nutrients.caloriess+nutrientsModel!.calories;
+        double newCarb=_Nutrients.carbss+nutrientsModel.carb;
+        print("new values ${newCalories}");
+       String titless=nutrientsModel.titles!.join(',');
+       var res=db!.update(_tablename,{"calories":newCalories,"carb":newCarb,"titles":titless},where: "id = ?",whereArgs: [1]);
         NutrientsController controller=NutrientsController();
-        //controller.getNutrients();
+        controller.getNutrients();
         return res;
   }
   // static delete(task t) async {

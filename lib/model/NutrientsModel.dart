@@ -13,14 +13,15 @@ class NutrientsModel{
   required this.titles,
   });
 
-  NutrientsModel.fromJson(Map<String,dynamic> json){
-    id:json['id'];
-    calories:json['calories'];
-    print("in json");
-    print(calories);
-    carb:json['carb'];
-   String titl=json['titles'];
-           titles=titl.split(',');
+ factory NutrientsModel.fromJson(Map<String,dynamic> json){
+  String listtitle=json['titles'];
+   return NutrientsModel(
+   //id=json['id'];
+    calories:json['calories'],
+     carb:json['carb'],
+   //String titl=json['titles'],
+      titles:listtitle.split(','),
+      );
     
   }
   

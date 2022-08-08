@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:get/get.dart';
 import 'package:nutritionanalysis/model/Food_Item.dart';
+import 'package:nutritionanalysis/model/Food_info.dart';
 
 import '../Components/Button.dart';
 import '../Services/Api_Services.dart';
+import '../Services/NutrientsController.dart';
+import '../model/NutrientsModel.dart';
 
 class Search_by_foodItem extends StatefulWidget {
   const Search_by_foodItem({Key? key}) : super(key: key);
@@ -16,9 +20,18 @@ class _Search_by_foodItemState extends State<Search_by_foodItem> {
   double? carbs;
   double? protein;
   double? fats;
-
+  List<String>? ListOfTodaysFood;
+    var _Nutrients=Get.put(NutrientsController());  
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     
+  }
   @override
   Widget build(BuildContext context) {
+    NutrientsModel _model=NutrientsModel(calories: 0, carb: 0, titles: [""]);
+
     return Scaffold(
       backgroundColor: Colors.grey,
       body: Column(
@@ -63,9 +76,16 @@ class _Search_by_foodItemState extends State<Search_by_foodItem> {
                       title: Card(child: Text(meal.name!)),
                     );
                   },
-                  onSuggestionSelected: (FoodResults suggestion) {
+                  onSuggestionSelected: (FoodResults suggestion)async {
                     //this function will execute when user clicks on suggested meal
-                  
+                    int? id=suggestion.id;
+                   List<FoodNutrients> nutrnts= await Api_Services.getFoodNutrition(id: id);
+                  _model.calories=nutrnts[18].amount;
+                  _model.carb=nutrnts[6].amount;
+                  print(_Nutrients.titless);
+                  _model.titles=_Nutrients.titless;
+                    await  _Nutrients.addNutrition(nutrients: _model);
+                _Nutrients.getNutrients();
                   },
                   noItemsFoundBuilder: (context) => const Center(
                     child: Text("No Meal Found"),

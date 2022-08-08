@@ -50,7 +50,7 @@ class Api_Services {
     }
   }
 
-  static Future<List<FoodNutrients>> getFoodNutrition({String? id}) async {
+  static Future<List<FoodNutrients>> getFoodNutrition({int? id}) async {
 //https://api.spoonacular.com/food/ingredients/9266/information?amount=1&apiKey=c020b400a8244106a0b807006800605b
   
    String baseUrl="https://api.spoonacular.com/food/ingredients/";   
@@ -65,7 +65,7 @@ class Api_Services {
       // print(food_info.nutrition!.nutrients!.length);
       List<FoodNutrients>? nutrients=food_info.nutrition!.nutrients;
       double? carbs=nutrients![6].amount;
-      double? Calories=nutrients![18].amount;
+      double? Calories=nutrients[18].amount;
       print("carbs: $carbs");
       print("calories: $Calories");
       return nutrients!;

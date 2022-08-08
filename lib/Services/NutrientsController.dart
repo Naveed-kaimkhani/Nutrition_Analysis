@@ -10,9 +10,9 @@ class NutrientsController extends GetxController {
     super.onReady();
   }
 
-    var calories=0.obs;
-  var carbs=0.obs;
-  var titles=<String>[].obs;
+  dynamic caloriess=0.obs;
+  dynamic carbss=0.obs;
+  dynamic titless=<String>[].obs;
      static var NutritionList = <NutrientsModel>[].obs;
 
   Future<int?> addNutrition({NutrientsModel? nutrients}) async {
@@ -23,7 +23,7 @@ class NutrientsController extends GetxController {
    //print("in add nutrition");
    
    if(Nutrientss.isNotEmpty){
-      DbHelper.update(nutrientsModel: nutrients);
+    await  DbHelper.update(nutrientsModel: nutrients);
     //  print("add function ran sucesfflu in if");
    }
    else{
@@ -40,16 +40,16 @@ class NutrientsController extends GetxController {
     NutritionList.assignAll(Nutrients.map((data) => new NutrientsModel.fromJson(data)).toList());
     print(NutritionList);
     print(NutritionList.length);
-    print(NutritionList[0].calories);
-   calories=NutritionList[0].calories  as RxInt;
-    // print("exception in get nutrients");
-    // print(NutritionList[ListLenght-1].calories);
-    // calories=NutritionList[ListLenght-1].calories as RxInt;
-     
-    // carbs=NutritionList[ListLenght-1].carb as RxInt;
+   // print(NutritionList[0].calories??".....");
+   if(NutritionList.length!=0){
+      caloriess=NutritionList[0].calories;
+   carbss=NutritionList[0].carb;
+   }
+   await getTodaysTitles();
+   print("get nutrients done");
   }
        
-       static Future<List<String>?> getTodaysTitles() async {
+     Future<List<String>?> getTodaysTitles() async {
     List<Map<String, dynamic>> Nutrients= await DbHelper.query();
     List<NutrientsModel> NutritionListTitles;
     NutritionList.assignAll(Nutrients.map((data) => new NutrientsModel.fromJson(data)).toList());
@@ -61,8 +61,10 @@ class NutrientsController extends GetxController {
    else{
   
     NutrientsModel model=NutritionList[lenght-1];
- print("exception in get today list");   
-   return model.titles;
+ print(" get today list");   
+ print(model.titles);
+  titless=model.titles;
+   return titless;
    }
    
   //print(model.titles);
