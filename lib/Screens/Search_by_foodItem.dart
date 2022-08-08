@@ -82,8 +82,14 @@ class _Search_by_foodItemState extends State<Search_by_foodItem> {
                    List<FoodNutrients> nutrnts= await Api_Services.getFoodNutrition(id: id);
                   _model.calories=nutrnts[18].amount;
                   _model.carb=nutrnts[6].amount;
+                  print("list of titles in fooditem");
                   print(_Nutrients.titless);
-                  _model.titles=_Nutrients.titless;
+                  String ti=_Nutrients.titless.toString();
+                  List<String> lot=ti.split(',');
+                  lot.add(suggestion.name??"");
+                  _model.titles=lot;
+                //  print(_model.titles);
+              //    print("before add Nutrition");
                     await  _Nutrients.addNutrition(nutrients: _model);
                 _Nutrients.getNutrients();
                   },

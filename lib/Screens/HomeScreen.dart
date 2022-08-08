@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.grey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 40.0, horizontal: 40.0),
+                      vertical: 30.0, horizontal: 40.0),
                   child: Column(
                     // mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

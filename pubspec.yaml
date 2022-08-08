@@ -37,6 +37,7 @@ dependencies:
   flutter_typeahead: ^4.0.0
   sqflite: ^2.0.3
   get: ^4.6.5
+  firebase_auth: ^3.6.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
