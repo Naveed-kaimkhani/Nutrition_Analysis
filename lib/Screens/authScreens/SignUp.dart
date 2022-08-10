@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nutritionanalysis/Screens/HomeScreen.dart';
+import 'package:nutritionanalysis/Screens/authScreens/SignIn.dart';
 import 'package:nutritionanalysis/Services/authentication_methods.dart';
-
 import '../../Components/Button.dart';
 import '../../Components/inputfields.dart';
-import 'SignUp.dart';
 
-class SignIn extends StatelessWidget {
-  SignIn({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  SignUp({Key? key}) : super(key: key);
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   SizedBox k = SizedBox(
@@ -23,16 +22,7 @@ class SignIn extends StatelessWidget {
           child: Column(
             children: [
               k,
-              k,
-              Padding(
-                padding: const EdgeInsets.only(left: 250.0),
-                child: Button(
-                    function: () {
-                      Get.to(() => HomeScreen());
-                    },
-                    text: "Use Unpaid Version"),
-              ),
-              Text("SignIn",
+              Text("SignUp",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               k,
               inputfields(
@@ -43,30 +33,27 @@ class SignIn extends StatelessWidget {
               k,
               Button(
                   function: () async {
-                    String output = await authentication_methods.SignInUsers(
+                    String output = await
+                        //  authentication_methods.SignupUsers(email: email, password: password)
+                        await authentication_methods.SignupUsers(
                       email: emailController.text,
                       password: passwordController.text,
                     );
-
-                    if (output == "SignIn Successfully") {
-                      Get.to(() => HomeScreen());
-                    } else {
-                      Get.snackbar(
-                        "Authentication Response",
-                        output,
-                        colorText: Colors.white,
-                        snackPosition: SnackPosition.BOTTOM,
-                      );
-                    }
+                    Get.snackbar("Authentication Response", output,
+                    colorText: Colors.white,
+                    snackPosition: SnackPosition.BOTTOM,
+                    );
                   },
-                  text: "SignIn"),
+                  text: "Create Account"),
               k,
-              k,
-              Button(
-                  function: () {
-                    Get.to(() => SignUp());
-                  },
-                  text: "Dont have an account?? SignUp"),
+              Padding(
+                padding: const EdgeInsets.only(left: 250.0),
+                child: Button(
+                    function: () {
+                      Get.to(() => SignIn());
+                    },
+                    text: "Go to login page"),
+              ),
             ],
           ),
         ),

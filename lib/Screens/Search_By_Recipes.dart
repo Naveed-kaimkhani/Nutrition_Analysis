@@ -28,6 +28,7 @@ class _Search_By_RecipesState extends State<Search_By_Recipes> {
     // TODO: implement initState
     print("in  set state of recipe");
     super.initState();
+     _Nutrients.getNutrients();
   // Future<RecipeInfo> rec = Api_Services.getRecipeNutrition(title: "Chicken 65");
   // ListOfTodaysFood = NutrientsController.getTodaysTitles();
     gettitles();

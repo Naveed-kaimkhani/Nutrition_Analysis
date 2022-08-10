@@ -14,7 +14,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 50,
-        width: 120,
+        width: 150,
         color: Colors.black,
         child: GestureDetector(
           onTap: function,

@@ -14,15 +14,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> today_food = ["fdfd", "fdfsdfs", "fdfsfsd"];
-  double? calories;
+//  double? calories;
   var _Nutrients = Get.put(NutrientsController());
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("init of homepage");
-    _Nutrients.getNutrients();
+   // print("init of homepage");
+   _Nutrients.getNutrients();
   }
 
   @override
@@ -41,18 +40,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.grey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 30.0, horizontal: 40.0),
+                      vertical: 10.0, horizontal: 40.0),
                   child: Column(
                     // mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Obx(() {
-                       // print("");
+                        // print("");
                         return Text(
                           // _Nutrients.carbs
                           "Calories: ${_Nutrients.caloriess}",
                           style: const TextStyle(
-                            fontSize: 30,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         );
@@ -65,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           // _Nutrients.carbs
                           "Carbs: ${_Nutrients.carbss}",
                           style: const TextStyle(
-                            fontSize: 30,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         );
@@ -99,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: size.height / 2,
                   width: size.width,
                   color: Color.fromARGB(255, 198, 191, 191),
-                  child: today_food != null
+                  child: _Nutrients.titless != null
                       ? ListView.builder(
                           itemCount: _Nutrients.titless.length,
                           itemBuilder: (context, index) {

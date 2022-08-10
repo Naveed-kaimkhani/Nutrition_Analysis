@@ -48,6 +48,10 @@ static Future<List<Map<String, Object?>>> queryRow(int id) async {
 static Future<int> update({NutrientsModel? nutrientsModel}){
         //String titless=jsonEncode(nutrientsModel!.titles);
      //  double cal=_Nutrients.caloriess
+    // num cal=_Nutrients.caloriess as num;
+    print("chal bhaiii");
+    print(_Nutrients.caloriess);
+    print(nutrientsModel!.calories);
         double newCalories=_Nutrients.caloriess+nutrientsModel!.calories;
         double newCarb=_Nutrients.carbss+nutrientsModel.carb;
         print("new values ${newCalories}");

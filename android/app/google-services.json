@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "121066985968",
+    "project_id": "nutrition-analysis-914aa",
+    "storage_bucket": "nutrition-analysis-914aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121066985968:android:487045d41768d6f07c2535",
+        "android_client_info": {
+          "package_name": "com.example.nutritionanalysis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121066985968-1ljk3nn4kvqengfo5iog0vkmepnfspuo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC532S9kddLf0pgwLKn3EDrTgHVxdyp9hY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121066985968-1ljk3nn4kvqengfo5iog0vkmepnfspuo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

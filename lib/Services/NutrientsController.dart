@@ -9,6 +9,7 @@ class NutrientsController extends GetxController {
   void onReady() {
     super.onReady();
   }
+//dynamic currentIndex=0.obs;
 
   dynamic caloriess=0.obs;
   dynamic carbss=0.obs;
@@ -33,7 +34,9 @@ class NutrientsController extends GetxController {
    }
     
   }
-
+  // void updateIndex(dynamic index){
+  //   currentIndex=index;
+  // }
   void getNutrients() async {
     List<Map<String, dynamic>> Nutrients= await DbHelper.query();
     print(Nutrients);   
