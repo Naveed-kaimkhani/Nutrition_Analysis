@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nutritionanalysis/Components/Button.dart';
+import 'package:nutritionanalysis/Screens/NoUserFound.dart';
+import 'package:nutritionanalysis/Screens/SearchRecipe.dart';
+import 'package:nutritionanalysis/Screens/SearchRecipes.dart';
 import 'package:nutritionanalysis/Screens/TabBarScreen.dart';
 import 'package:nutritionanalysis/Services/NutrientsController.dart';
 
@@ -20,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-   // print("init of homepage");
-   _Nutrients.getNutrients();
+    // print("init of homepage");
+    _Nutrients.getNutrients();
   }
 
   @override
@@ -76,9 +80,26 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),
                         child: Button(
                             function: () {
-                              Get.to(() => TabBarScreen());
+                              // Get.to(() => TabBarScreen()
+                              // );
                             },
                             text: "Add new Item"),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0, left: 120.0),
+                        child: Button(
+                            function: ()async {
+                            //await  FirebaseAuth.instance.signOut();
+                              User? user = FirebaseAuth.instance.currentUser;
+                            
+                              if (user == null) {
+                                Get.to(() => NoUserFound());
+                              } else {
+                                Get.to(() => SearchRecipes());
+                              }
+                              //      Get.to(() => TabBarScreen());
+                            },
+                            text: "Search Recipes"),
                       ),
                       const SizedBox(
                         height: 38,
