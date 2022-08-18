@@ -15,7 +15,7 @@ class RecipeItem extends StatelessWidget {
       margin: EdgeInsets.all(20),
       padding: EdgeInsets.all(5),
       alignment: Alignment.topLeft,
-      height: 250,
+      height: 270,
       width: 200,
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -36,7 +36,7 @@ class RecipeItem extends StatelessWidget {
             child: Text(
               recipe.title!,
               overflow: TextOverflow.ellipsis,
-              maxLines: 4,
+              maxLines: 2,
               // "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
               textAlign: TextAlign.start,
               style: TextStyle(fontSize: 15),

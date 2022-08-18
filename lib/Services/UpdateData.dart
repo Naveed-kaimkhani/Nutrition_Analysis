@@ -11,7 +11,9 @@ class UpdateData{
 
     final now=DateTime.now();
    String currentDate= DateFormat('dd-MM-yyyy').format(now);
+
    prefs.setString("currentDate", currentDate);
+      print("date seted");
   }
 
    static Future<String> getCurrentDate()async{
@@ -26,7 +28,11 @@ class UpdateData{
 
       String currentDate=await getCurrentDate();
       String? storedDate= prefs.getString("currentDate");
-      if (currentDate!=storedDate) {
+   // print("in update values func");
+     // print(currentDate);
+     // print("stored value is ${storedDate}");
+      print(currentDate==storedDate);
+      if (currentDate==storedDate) {
         //update values
             List<Map<String, dynamic>> Nutrients= await DbHelper.queryRow(1);
             print(Nutrients[0]);
@@ -34,6 +40,7 @@ class UpdateData{
       await DbHelper.insert(nutrientsModel,"LastWeek");
     DbHelper.ResetNutrientsCounter();
 prefs.setString("currentDate", currentDate);
+print("values 0");
     
       }
 

@@ -7,7 +7,7 @@ import 'package:nutritionanalysis/Screens/SearchRecipes.dart';
 import 'package:nutritionanalysis/Services/NutrientsController.dart';
 
 import '../Services/UpdateData.dart';
-
+import 'TabBarScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -23,14 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print("in home page init state");
     // print("init of homepage");
-    UpdateData.UpdateValues();
-    _Nutrients.getNutrients();
 
+    _Nutrients.getNutrients();
   }
 
   @override
   Widget build(BuildContext context) {
+    UpdateData.UpdateValues();
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -81,18 +83,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),
                         child: Button(
                             function: () {
-                              // Get.to(() => TabBarScreen()
-                              // );
+                              Get.to(() => TabBarScreen());
                             },
                             text: "Add new Item"),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),
                         child: Button(
-                            function: ()async {
-                            //await  FirebaseAuth.instance.signOut();
+                            function: () async {
+                              //await  FirebaseAuth.instance.signOut();
                               User? user = FirebaseAuth.instance.currentUser;
-                            
+
                               if (user == null) {
                                 Get.to(() => NoUserFound());
                               } else {

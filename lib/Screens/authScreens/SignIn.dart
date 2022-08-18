@@ -71,8 +71,7 @@ class _SignInState extends State<SignIn> {
                       isLoading = false;
                     });
                     if (output == "SignIn Successfully") {
-                       SharedPreferences prefs = await SharedPreferences.getInstance();
-                      UpdateData.SetDate();
+                       
                       Get.to(() => HomeScreen());
                     } else {
                       Get.snackbar(

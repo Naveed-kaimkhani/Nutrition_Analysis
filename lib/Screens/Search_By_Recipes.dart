@@ -119,7 +119,7 @@ NutrientsModel _model=NutrientsModel(calories: 0, carb: 0, titles: [""]);
                   debounceDuration: const Duration(milliseconds: 400),
                 ),
               ),
-              Button(function: () {}, text: "Search"),
+             // Button(function: () {}, text: "Search"),
             ],
           ),
         ],
