@@ -1,24 +1,24 @@
-
 import 'package:flutter/material.dart';
 import 'package:nutritionanalysis/model/Response_Model.dart';
+import 'package:nutritionanalysis/model/ShowRecipe.dart';
 
 class RecipeItem extends StatelessWidget {
-//final Results Recipe;
-  const RecipeItem
-  ({
-    Key? key,//required this.Recipe,
+  final Results recipe;
+  const RecipeItem({
+    Key? key,
+    required this.recipe,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
       alignment: Alignment.topLeft,
-      height: 220,
-      width: 190,
+      height: 250,
+      width: 200,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -26,21 +26,23 @@ class RecipeItem extends StatelessWidget {
           GestureDetector(
             onTap: () {},
             child: Image.network(
-           "https://spoonacular.com/recipeImages/716429-312x231.jpg",
-              height: 80,
-              width: 80,
+              recipe.image!,
+              height: 100,
+              width: 100,
             ),
           ),
           Align(
             alignment: Alignment.topLeft,
             child: Text(
-              "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
-              //textAlign: TextAlign.start,
+              recipe.title!,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 4,
+              // "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+              textAlign: TextAlign.start,
               style: TextStyle(fontSize: 15),
             ),
           ),
           SizedBox(height: 3),
-          
         ],
       ),
     );

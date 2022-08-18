@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:nutritionanalysis/model/Food_Item.dart';
 import 'package:nutritionanalysis/model/Food_info.dart';
 import 'package:nutritionanalysis/model/Response_Model.dart';
+import 'package:nutritionanalysis/model/ShowRecipe.dart';
 
 import '../model/RecipeInfo.dart';
 
@@ -17,7 +18,7 @@ class Api_Services {
   //this function will provide all suggestions
   static Future<List<Results>> getMealSuggestion({String? query}) async {
       String parameter =
-      "&maxFat=100&maxProtein=100&maxCarbs=200&number=10&apiKey=";
+      "&maxFat=100&maxProtein=100&maxCarbs=200&number=50&apiKey=";
 
     http.Response response =
         await http.get(Uri.parse('$baseUrlForRecipes$query$parameter$ApiKey'));
@@ -27,7 +28,23 @@ class Api_Services {
       Response_Model RM = Response_Model.fromJson(meals);
 
       
-      return RM.results!;
+      return RM.results!; 
+    } else {
+      throw Exception();
+    }
+  }
+  static Future<List<Recipes>> getRandomRecipe() async {
+    
+    http.Response response =
+        await http.get(
+          Uri.parse('https://api.spoonacular.com/recipes/random?number=20&tags=vegan,dessert&apiKey=c020b400a8244106a0b807006800605b'));
+    if (response.statusCode == 200) {
+      var meals = json.decode(response.body);    
+      print(meals);
+      ShowRecipe SR = ShowRecipe.fromJson(meals);
+
+      
+      return SR.recipes!;
     } else {
       throw Exception();
     }

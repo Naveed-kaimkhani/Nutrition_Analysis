@@ -1,0 +1,44 @@
+import 'package:intl/intl.dart';
+import 'package:nutritionanalysis/model/NutrientsModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'DbHelper.dart';
+
+class UpdateData{
+
+  static void SetDate()async{
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final now=DateTime.now();
+   String currentDate= DateFormat('dd-MM-yyyy').format(now);
+   prefs.setString("currentDate", currentDate);
+  }
+
+   static Future<String> getCurrentDate()async{
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+    final now=DateTime.now();
+   String currentDate= DateFormat('dd-MM-yyyy').format(now);
+  //String? StoredDate= prefs.getString("currentDate");
+  return currentDate;
+  }
+ static void UpdateValues()async{
+           SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      String currentDate=await getCurrentDate();
+      String? storedDate= prefs.getString("currentDate");
+      if (currentDate!=storedDate) {
+        //update values
+            List<Map<String, dynamic>> Nutrients= await DbHelper.queryRow(1);
+            print(Nutrients[0]);
+          NutrientsModel nutrientsModel=NutrientsModel.fromJson(Nutrients[0]);
+      await DbHelper.insert(nutrientsModel,"LastWeek");
+    DbHelper.ResetNutrientsCounter();
+prefs.setString("currentDate", currentDate);
+    
+      }
+
+  }
+ 
+
+
+}

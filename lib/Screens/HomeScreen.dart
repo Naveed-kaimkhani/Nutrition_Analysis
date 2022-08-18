@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nutritionanalysis/Components/Button.dart';
 import 'package:nutritionanalysis/Screens/NoUserFound.dart';
-import 'package:nutritionanalysis/Screens/SearchRecipe.dart';
 import 'package:nutritionanalysis/Screens/SearchRecipes.dart';
-import 'package:nutritionanalysis/Screens/TabBarScreen.dart';
 import 'package:nutritionanalysis/Services/NutrientsController.dart';
 
-import '../Services/Api_Services.dart';
+import '../Services/UpdateData.dart';
+
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -25,7 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     // print("init of homepage");
+    UpdateData.UpdateValues();
     _Nutrients.getNutrients();
+
   }
 
   @override

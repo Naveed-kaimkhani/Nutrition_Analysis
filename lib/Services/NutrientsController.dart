@@ -29,7 +29,7 @@ class NutrientsController extends GetxController {
    }
    else{
   // print("add function ran sucesfflu in else");
-      return await DbHelper.insert(nutrients);
+      return await DbHelper.insert(nutrients,"Nutrients");
    
    }
     

@@ -7,29 +7,42 @@ class DbHelper {
   static Database? db;
   static final int _version = 1;
   static final String _tablename = "Nutrients";
+    static final String _lastWeek = "LastWeek";
+
  static var _Nutrients=Get.put(NutrientsController());  
  
   static Future<void> initDb() async {
     if (db != null) {
       
       return;
-      
+      //_createDb(db,_version); 
     }
    try {
       String _path = await getDatabasesPath() + 'task.db';
       db = await openDatabase(_path, version: _version,
-          onCreate: (db, _version) {
+          onCreate:   (db, _version) async{
         print("creating a new one");
-        return db.execute('''CREATE TABLE $_tablename(
+        await db.execute('''CREATE TABLE $_tablename(
         id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
-      });
+        return db.execute('''CREATE TABLE $_lastWeek(
+        id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
+        
+      }
+      );
       print("database initilize");
     } catch (e) {
       print(e);
     }
   }
-
-  static Future<int?> insert(NutrientsModel? nutrients) async {
+//  void _createDb(Database db, int newVersion) async {
+//  await db.execute('''CREATE TABLE $_tablename(
+//         id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
+        
+//  await db.execute('''CREATE TABLE $_tablename(
+//         id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
+        
+//   }
+  static Future<int?> insert(NutrientsModel? nutrients,String _tablename) async {
     print("insert function called");
     //NutrientsController controller=NutrientsController();
         //controller.getNutrients();
@@ -46,9 +59,7 @@ static Future<List<Map<String, Object?>>> queryRow(int id) async {
   }
 
 static Future<int> update({NutrientsModel? nutrientsModel}){
-        //String titless=jsonEncode(nutrientsModel!.titles);
-     //  double cal=_Nutrients.caloriess
-    // num cal=_Nutrients.caloriess as num;
+    
     print("chal bhaiii");
     print(_Nutrients.caloriess);
     print(nutrientsModel!.calories);
@@ -61,6 +72,15 @@ static Future<int> update({NutrientsModel? nutrientsModel}){
         controller.getNutrients();
         return res;
   }
+   
+static Future<int> ResetNutrientsCounter(){
+       var res=db!.update(_tablename,{"calories":0,"carb":0,"titles":""},where: "id = ?",whereArgs: [1]);
+      //  NutrientsController controller=NutrientsController();
+        _Nutrients.getNutrients();
+        return res;
+  }
+
+  
   // static delete(task t) async {
   //   await db!.delete(_tablename, where: 'id=?', whereArgs: [t.id]);
   // }
