@@ -8,11 +8,14 @@ import 'package:nutritionanalysis/model/ShowRecipe.dart';
 import '../model/RecipeInfo.dart';
 
 class Api_Services {
-
+//new api key 4b3dd8acf624a3eaf6571886b978234
   static String baseUrlForRecipes =
       "https://api.spoonacular.com/recipes/complexSearch?query=";
 
   static String ApiKey = "c020b400a8244106a0b807006800605b";
+ static String ApiKeyyy = "24b3dd8acf624a3eaf6571886b978234";
+ static String ApiKeyy = "54eb0d035d65430cbc897664c08f45d4";
+
 
 
   //this function will provide all suggestions
@@ -21,7 +24,7 @@ class Api_Services {
       "&maxFat=100&maxProtein=100&maxCarbs=200&number=50&apiKey=";
 
     http.Response response =
-        await http.get(Uri.parse('$baseUrlForRecipes$query$parameter$ApiKey'));
+        await http.get(Uri.parse('$baseUrlForRecipes$query$parameter$ApiKeyy'));
     if (response.statusCode == 200) {
       var meals = json.decode(response.body);    
       print(meals);
@@ -37,13 +40,14 @@ class Api_Services {
     
     http.Response response =
         await http.get(
-          Uri.parse('https://api.spoonacular.com/recipes/random?number=20&tags=vegan,dessert&apiKey=c020b400a8244106a0b807006800605b'));
+                    Uri.parse('https://api.spoonacular.com/recipes/random?number=20&tags=vegan,dessert&apiKey=54eb0d035d65430cbc897664c08f45d4'));
+
+//          Uri.parse('https://api.spoonacular.com/recipes/random?number=20&tags=vegan,dessert&apiKey=c020b400a8244106a0b807006800605b'));
     if (response.statusCode == 200) {
       var meals = json.decode(response.body);    
       print(meals);
       ShowRecipe SR = ShowRecipe.fromJson(meals);
 
-      
       return SR.recipes!;
     } else {
       throw Exception();
@@ -56,7 +60,7 @@ class Api_Services {
    String baseUrl="https://api.spoonacular.com/food/ingredients/search?query=";   
     String parameter="&number=10&sort=calories&sortDirection=desc&apiKey=";
     http.Response response =
-        await http.get(Uri.parse('$baseUrl$query$parameter$ApiKey'));
+        await http.get(Uri.parse('$baseUrl$query$parameter$ApiKeyy'));
     if (response.statusCode == 200) {
       var meals = json.decode(response.body);    
       Food_Item food_item = Food_Item.fromJson(meals);
@@ -73,7 +77,7 @@ class Api_Services {
    String baseUrl="https://api.spoonacular.com/food/ingredients/";   
     String parameter="/information?amount=1&apiKey=";
     http.Response response =
-        await http.get(Uri.parse('$baseUrl$id$parameter$ApiKey'));
+        await http.get(Uri.parse('$baseUrl$id$parameter$ApiKeyy'));
     if (response.statusCode == 200) {
       var meals = json.decode(response.body);    
       print(meals);
@@ -98,12 +102,13 @@ class Api_Services {
    String baseUrl="https://api.spoonacular.com/recipes/guessNutrition?title=";   
     
     http.Response response =
-        await http.get(Uri.parse('$baseUrl$title${"&apiKey="}$ApiKey'));
+        await http.get(Uri.parse('$baseUrl$title${"&apiKey="}$ApiKeyy'));
     if (response.statusCode == 200) {
       var recipeNutrients = json.decode(response.body);    
       print("sub set hy");
     //  print(recipeNutrients);
       RecipeInfo food_info = RecipeInfo.fromJson(recipeNutrients);
+      print(food_info.calories!.value);
       double? calories= food_info.calories!.value;
         double? carb= food_info.carbs!.value;
         print(calories);
@@ -114,7 +119,4 @@ class Api_Services {
       throw Exception();
     }
   }
-
-
-
 }

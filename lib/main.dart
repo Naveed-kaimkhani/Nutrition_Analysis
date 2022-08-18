@@ -5,6 +5,7 @@ import 'package:nutritionanalysis/Components/RecipeItem.dart';
 import 'package:nutritionanalysis/Screens/HomeScreen.dart';
 import 'package:nutritionanalysis/Screens/SearchRecipes.dart';
 import 'package:nutritionanalysis/Screens/authScreens/SignIn.dart';
+import 'package:nutritionanalysis/Services/authentication_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/authScreens/SignUp.dart';
 import 'Services/DbHelper.dart';
@@ -28,6 +29,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      home:SignUp());
+      home:authentication_methods.hndleAuthState());
   }
 }

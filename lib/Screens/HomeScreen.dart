@@ -25,14 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     print("in home page init state");
     // print("init of homepage");
-
+    UpdateData.UpdateValues();
     _Nutrients.getNutrients();
   }
 
   @override
   Widget build(BuildContext context) {
-    UpdateData.UpdateValues();
-
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -86,6 +84,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               Get.to(() => TabBarScreen());
                             },
                             text: "Add new Item"),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6.0, left: 120.0),
+                        child: Button(
+                            function: () {
+                              UpdateData.UpdateValues();
+                              _Nutrients.getNutrients();
+                            },
+                            text: "make 0"),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),

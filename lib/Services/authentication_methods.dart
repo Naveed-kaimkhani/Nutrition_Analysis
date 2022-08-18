@@ -1,4 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:nutritionanalysis/Screens/HomeScreen.dart';
+import 'package:nutritionanalysis/Screens/authScreens/SignIn.dart';
 
 class authentication_methods {
   static Future<String> SignupUsers(
@@ -58,5 +61,17 @@ class authentication_methods {
     //print("output is $output");
     // return output as Future<String>;
     return output;
+  }
+
+ static hndleAuthState() {
+    return StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.hasData) {
+            return HomeScreen();
+          } else {
+            return SignIn();
+          }
+        });
   }
 }
