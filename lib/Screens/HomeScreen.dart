@@ -18,6 +18,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 //  double? calories;
+  var val = 9;
+  void inc() {
+    setState(() {
+      val++;
+    });
+  }
+
   var _Nutrients = Get.put(NutrientsController());
   @override
   void initState() {
@@ -50,11 +57,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     // mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Obx(() {
-                        // print("");
+                      GestureDetector(
+                          onTap: () => inc(), child: Text(val.toString())),
+                      GetBuilder<NutrientsController>(builder: (controller) {
                         return Text(
                           // _Nutrients.carbs
-                          "Calories: ${_Nutrients.caloriess}",
+                          "Carbs: ${_Nutrients.carbss}",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -64,10 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Obx(() {
+                      GetBuilder<NutrientsController>(builder: (controller) {
                         return Text(
                           // _Nutrients.carbs
-                          "Carbs: ${_Nutrients.carbss}",
+                          "Calories: ${controller.caloriess}",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -90,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Button(
                             function: () {
                               UpdateData.UpdateValues();
-                              _Nutrients.getNutrients();
+                              // _Nutrients.getNutrients();
                             },
                             text: "make 0"),
                       ),

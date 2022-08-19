@@ -37,16 +37,16 @@ class UpdateData {
     // print(currentDate);
     // print("stored value is ${storedDate}");
     // print(currentDate == storedDate);
-    if (currentDate == storedDate) {
+    if (currentDate != storedDate) {
       //update values
       List<Map<String, dynamic>> Nutrients = await DbHelper.queryRow(1);
       print(Nutrients[0]);
       NutrientsModel nutrientsModel = NutrientsModel.fromJson(Nutrients[0]);
       await DbHelper.insert(nutrientsModel, "LastWeek");
-      DbHelper.ResetNutrientsCounter();
+      await DbHelper.ResetNutrientsCounter();
+    //  _Nutrients.getNutrients();
       prefs.setString("currentDate", currentDate);
       print("values 0");
-      _Nutrients.getNutrients();
     }
     print("not in if");
   }

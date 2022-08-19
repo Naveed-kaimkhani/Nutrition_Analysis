@@ -23,7 +23,7 @@ class NutrientsController extends GetxController {
     // print(Nutrientss.length??"0");
     // print(Nutrientss);
     //print("in add nutrition");
-      print(Nutrientss.isNotEmpty);
+    print(Nutrientss.isNotEmpty);
     if (Nutrientss.isNotEmpty) {
       await DbHelper.update(nutrientsModel: nutrients);
       print("add function ran sucesfflu in if");
@@ -45,10 +45,12 @@ class NutrientsController extends GetxController {
     print(NutritionList.length);
     // print(NutritionList[0].calories??".....");
     if (NutritionList.length != 0) {
+      print("in if of getNutrients update wala method");
       caloriess = NutritionList[0].calories;
       carbss = NutritionList[0].carb;
       print("carbss me $carbss");
       print("cal me $caloriess");
+      update();
     }
     await getTodaysTitles();
     print("get nutrients done");

@@ -43,7 +43,7 @@ class DbHelper {
       NutrientsModel? nutrients, String _tablename) async {
     print("insert function called");
     await db?.insert(_tablename, NutrientsModel.tojson(model: nutrients));
-    _Nutrients.getNutrients();
+    //_Nutrients.getNutrients();
     return 1;
   }
 
@@ -69,15 +69,16 @@ class DbHelper {
         {"calories": newCalories, "carb": newCarb, "titles": titless},
         where: "id = ?", whereArgs: [1]);
     // NutrientsController controller=NutrientsController();
-    _Nutrients.getNutrients();
+    //  _Nutrients.getNutrients();
     return res;
   }
 
   static Future<int> ResetNutrientsCounter() {
-    var res = db!.update(_tablename, {"calories": 0, "carb": 0, "titles": ""},
+    var res = db!.update(
+        _tablename, {"calories": 0.0, "carb": 0.0, "titles": ""},
         where: "id = ?", whereArgs: [1]);
     //  NutrientsController controller=NutrientsController();
-    // _Nutrients.getNutrients();
+    _Nutrients.getNutrients();
     return res;
   }
 
