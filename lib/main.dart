@@ -29,6 +29,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      home:authentication_methods.hndleAuthState());
+      home:SearchRecipes());
   }
 }

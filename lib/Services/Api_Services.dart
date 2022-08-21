@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:nutritionanalysis/model/Food_Item.dart';
 import 'package:nutritionanalysis/model/Food_info.dart';
 import 'package:nutritionanalysis/model/Response_Model.dart';
-import 'package:nutritionanalysis/model/ShowRecipe.dart';
+import 'package:nutritionanalysis/model/RecipePageInfo.dart';
 
 import '../model/RecipeInfo.dart';
 
@@ -36,24 +36,21 @@ class Api_Services {
       throw Exception();
     }
   }
-  static Future<List<Recipes>> getRandomRecipe() async {
-    
-    http.Response response =
-        await http.get(
-                    Uri.parse('https://api.spoonacular.com/recipes/random?number=20&tags=vegan,dessert&apiKey=54eb0d035d65430cbc897664c08f45d4'));
 
-//          Uri.parse('https://api.spoonacular.com/recipes/random?number=20&tags=vegan,dessert&apiKey=c020b400a8244106a0b807006800605b'));
+  static Future<List<Results>> getKetoRecipes() async {
+     String url="https://api.spoonacular.com/recipes/complexSearch?diet=Ketogenic&maxFat=100&maxProtein=100&maxCarbs=200&number=30&apiKey=c020b400a8244106a0b807006800605b";
+    http.Response response =
+        await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       var meals = json.decode(response.body);    
-      print(meals);
-      ShowRecipe SR = ShowRecipe.fromJson(meals);
-
-      return SR.recipes!;
+   //   print(meals);
+      Response_Model RM = Response_Model.fromJson(meals);
+      return RM.results!; 
     } else {
       throw Exception();
     }
   }
-
+  
   
   //this function will provide all suggestions
   static Future<List<FoodResults>> getFoodSuggestion({String? query}) async {
@@ -115,6 +112,26 @@ class Api_Services {
         print(carb);
         print("set");
       return food_info;
+    } else {
+      throw Exception();
+    }
+  }
+
+  
+  static Future<RecipePageInfo> getRecipeInform({int? id}) async {
+//https://api.spoonacular.com/recipes/guessNutrition?title=Chicken%2065&apiKey=c020b400a8244106a0b807006800605b
+   String baseUrl="https://api.spoonacular.com/recipes/";
+   String parameter="/information?includeNutrition=true&apiKey=";
+    //https://api.spoonacular.com/recipes/716429/information?includeNutrition=true&apiKey=c020b400a8244106a0b807006800605b
+    http.Response response =
+        await http.get(Uri.parse('$baseUrl$id$parameter$ApiKeyy'));
+    if (response.statusCode == 200) {
+      var recipeInfo = json.decode(response.body);    
+//print("sub set hy");
+    //  print(recipeNutrients);
+      RecipePageInfo RecipeInform = RecipePageInfo.fromJson(recipeInfo);
+     
+      return RecipeInform;
     } else {
       throw Exception();
     }

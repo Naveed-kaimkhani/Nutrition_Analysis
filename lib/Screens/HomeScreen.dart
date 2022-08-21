@@ -93,15 +93,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             text: "Add new Item"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 6.0, left: 120.0),
-                        child: Button(
-                            function: () {
-                              UpdateData.UpdateValues();
-                              // _Nutrients.getNutrients();
-                            },
-                            text: "make 0"),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 6.0, left: 120.0),
+                      //   child: Button(
+                      //       function: () {
+                      //         UpdateData.UpdateValues();
+                      //         // _Nutrients.getNutrients();
+                      //       },
+                      //       text: "make 0"),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),
                         child: Button(

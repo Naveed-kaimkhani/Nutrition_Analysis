@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nutritionanalysis/Components/RecipeItem.dart';
 import 'package:nutritionanalysis/Components/SearchBarWidget.dart';
+import 'package:nutritionanalysis/Screens/NoUserFound.dart';
 import 'package:nutritionanalysis/Services/Api_Services.dart';
-import 'package:nutritionanalysis/model/ShowRecipe.dart';
+import 'package:nutritionanalysis/model/RecipePageInfo.dart';
 
 import '../model/Response_Model.dart';
-import '../model/ShowRecipe.dart';
+import '../model/RecipePageInfo.dart';
 
 class SearchRecipes extends StatefulWidget {
   SearchRecipes({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class _SearchRecipesState extends State<SearchRecipes> {
             isReadOnly: true,
           ),
           body: FutureBuilder(
-              future: Api_Services.getMealSuggestion(query: "Chicken"),
+              future: Api_Services.getKetoRecipes(),
               builder: (context, AsyncSnapshot<List<Results>> snapshot) {
                 if (snapshot.hasData) {
                   print(snapshot.data!.length);
@@ -38,8 +40,14 @@ class _SearchRecipesState extends State<SearchRecipes> {
                         childAspectRatio: 2 / 3.3,
                       ),
                       itemBuilder: (context, index) {
-                        return RecipeItem(
-                          recipe: snapshot.data![index],
+                        return GestureDetector(
+                          onTap:(){
+                            print("in recipe widget");
+                            Get.to(()=>snapshot.data![index].id);
+                          },
+                          child: RecipeItem(
+                            recipe: snapshot.data![index],
+                          ),
                         );
                       });
                 } else {

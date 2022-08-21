@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nutritionanalysis/model/Response_Model.dart';
-import 'package:nutritionanalysis/model/ShowRecipe.dart';
+import 'package:nutritionanalysis/model/RecipePageInfo.dart';
 
 class RecipeItem extends StatelessWidget {
   final Results recipe;
@@ -12,10 +12,10 @@ class RecipeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
+      margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(5),
       alignment: Alignment.topLeft,
-      height: 270,
+      height: 400,
       width: 200,
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -32,16 +32,28 @@ class RecipeItem extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              recipe.title!,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              // "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
-              textAlign: TextAlign.start,
-              style: TextStyle(fontSize: 15),
-            ),
-          ),
+              alignment: Alignment.topLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    recipe.title!,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 4,
+                    // "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 2),
+                    child: Text(
+                        "Carbs:${recipe.nutrition!.nutrients![2].amount!.round().toString()} g",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
+                ],
+              )),
           SizedBox(height: 3),
         ],
       ),
