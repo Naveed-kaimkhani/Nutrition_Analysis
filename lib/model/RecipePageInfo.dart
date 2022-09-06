@@ -32,13 +32,17 @@ class RecipePageInfo {
   bool? veryPopular;
   bool? whole30;
   int? weightWatcherSmartPoints;
-  List<String>? dishTypes;
+  List<dynamic>? dishTypes;
   List<ExtendedIngredients>? extendedIngredients;
   String? summary;
+    Nutrition? nutrition;
+
   WinePairing? winePairing;
 
   RecipePageInfo(
       {required this.id,
+      required       this.nutrition,
+
      required this.title,
     required  this.image,
     required  this.imageType,
@@ -77,6 +81,7 @@ required      this.weightWatcherSmartPoints,
      required this.winePairing});
 
   RecipePageInfo.fromJson(Map<String, dynamic> json) {
+   // print("in Recipe page info from json");
     id = json['id'];
     title = json['title'];
     image = json['image'];
@@ -91,6 +96,9 @@ required      this.weightWatcherSmartPoints,
     healthScore = json['healthScore'];
     spoonacularScore = json['spoonacularScore'];
     pricePerServing = json['pricePerServing'];
+    nutrition = (json['nutrition'] != null
+        ? new Nutrition.fromJson(json['nutrition'])
+        : null)!;
     // if (json['analyzedInstructions'] != null) {
     //   analyzedInstructions = new List<Null>();
     //   json['analyzedInstructions'].forEach((v) {
@@ -130,17 +138,18 @@ required      this.weightWatcherSmartPoints,
     veryPopular = json['veryPopular'];
     whole30 = json['whole30'];
     weightWatcherSmartPoints = json['weightWatcherSmartPoints'];
-    dishTypes = json['dishTypes'].cast<String>();
-    // if (json['extendedIngredients'] != null) {
-    //   extendedIngredients = new List<ExtendedIngredients>();
-    //   json['extendedIngredients'].forEach((v) {
-    //     extendedIngredients.add(new ExtendedIngredients.fromJson(v));
-    //   });
-    // }
+    dishTypes = json['dishTypes'];
+    if (json['extendedIngredients'] != null) {
+      extendedIngredients = <ExtendedIngredients>[];
+      json['extendedIngredients'].forEach((v) {
+        extendedIngredients!.add(new ExtendedIngredients.fromJson(v));
+      });
+    }
     summary = json['summary'];
     winePairing = (json['winePairing'] != null
         ? new WinePairing.fromJson(json['winePairing'])
         : null)!;
+       // print("leaving Recipe page info from json");
   }
 
   Map<String, dynamic> toJson() {
@@ -235,7 +244,7 @@ required      this.id,
     measures = (json['measures'] != null
         ? new Measures.fromJson(json['measures'])
         : null)!;
-    meta = json['meta'].cast<String>();
+    //meta = json['meta'];
     name = json['name'];
     original = json['original'];
     originalName = json['originalName'];
@@ -315,7 +324,7 @@ class WinePairing {
   WinePairing({required this.pairedWines,required this.pairingText,required this.productMatches});
 
   WinePairing.fromJson(Map<String, dynamic> json) {
-    pairedWines = json['pairedWines'].cast<String>();
+    pairedWines = json['pairedWines'];
     pairingText = json['pairingText'];
     if (json['productMatches'] != null) {
       productMatches = <ProductMatches>[];
@@ -382,6 +391,127 @@ class ProductMatches {
     data['ratingCount'] = this.ratingCount;
     data['score'] = this.score;
     data['link'] = this.link;
+    return data;
+  }
+}
+
+  class Nutrition {
+  List<Nutrients>? nutrients;
+  List<Properties>? properties;
+  // List<Flavonoids> flavonoids;
+  // List<Ingredients> ingredients;
+  // CaloricBreakdown caloricBreakdown;
+  // WeightPerServing weightPerServing;
+
+  Nutrition(
+      {this.nutrients,
+      this.properties,
+      // this.flavonoids,
+      // this.ingredients,
+      // this.caloricBreakdown,
+      // this.weightPerServing
+      });
+
+  Nutrition.fromJson(Map<String, dynamic> json) {
+    if (json['nutrients'] != null) {
+      nutrients = <Nutrients>[];
+      json['nutrients'].forEach((v) {
+        nutrients!.add(new Nutrients.fromJson(v));
+      });
+    }
+    if (json['properties'] != null) {
+      properties = <Properties>[];
+      json['properties'].forEach((v) {
+        properties!.add(new Properties.fromJson(v));
+      });
+    }
+    // if (json['flavonoids'] != null) {
+    //   flavonoids = new List<Flavonoids>();
+    //   json['flavonoids'].forEach((v) {
+    //     flavonoids.add(new Flavonoids.fromJson(v));
+    //   });
+    // }
+    // if (json['ingredients'] != null) {
+    //   ingredients = new List<Ingredients>();
+    //   json['ingredients'].forEach((v) {
+    //     ingredients.add(new Ingredients.fromJson(v));
+    //   });
+    // }
+    // caloricBreakdown = json['caloricBreakdown'] != null
+    //     ? new CaloricBreakdown.fromJson(json['caloricBreakdown'])
+    //     : null;
+    // weightPerServing = json['weightPerServing'] != null
+    //     ? new WeightPerServing.fromJson(json['weightPerServing'])
+    //     : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.nutrients != null) {
+      data['nutrients'] = this.nutrients!.map((v) => v.toJson()).toList();
+    }
+    if (this.properties != null) {
+      data['properties'] = this.properties!.map((v) => v.toJson()).toList();
+    }
+    // if (this.flavonoids != null) {
+    //   data['flavonoids'] = this.flavonoids.map((v) => v.toJson()).toList();
+    // }
+    // if (this.ingredients != null) {
+    //   data['ingredients'] = this.ingredients.map((v) => v.toJson()).toList();
+    // }
+    // if (this.caloricBreakdown != null) {
+    //   data['caloricBreakdown'] = this.caloricBreakdown.toJson();
+    // }
+    // if (this.weightPerServing != null) {
+    //   data['weightPerServing'] = this.weightPerServing.toJson();
+    // }
+    return data;
+  }
+}
+
+class Nutrients {
+  String? name;
+  double? amount;
+  String? unit;
+  double? percentOfDailyNeeds;
+
+  Nutrients({this.name, this.amount, this.unit, this.percentOfDailyNeeds});
+
+  Nutrients.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    amount = json['amount'];
+    unit = json['unit'];
+    percentOfDailyNeeds = json['percentOfDailyNeeds'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['amount'] = this.amount;
+    data['unit'] = this.unit;
+    data['percentOfDailyNeeds'] = this.percentOfDailyNeeds;
+    return data;
+  }
+}
+
+class Properties {
+  String? name;
+  double? amount;
+  String? unit;
+
+  Properties({this.name, this.amount, this.unit});
+
+  Properties.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    amount = json['amount'];
+    unit = json['unit'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['amount'] = this.amount;
+    data['unit'] = this.unit;
     return data;
   }
 }

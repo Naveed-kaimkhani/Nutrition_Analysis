@@ -12,12 +12,14 @@ import 'Services/DbHelper.dart';
 import 'Services/UpdateData.dart';
 
 Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   // print("in main");
   await Firebase.initializeApp();
   await DbHelper.initDb();
   SharedPreferences prefs = await SharedPreferences.getInstance();
                       UpdateData.SetDate();
+  
   runApp(const MyApp());
 }
 
@@ -29,6 +31,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      home:SearchRecipes());
+      home:HomeScreen());
   }
 }

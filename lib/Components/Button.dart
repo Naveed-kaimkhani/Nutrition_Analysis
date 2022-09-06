@@ -13,7 +13,7 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50,
+        height: 40,
         width: 150,
         color: Colors.black,
         child: GestureDetector(

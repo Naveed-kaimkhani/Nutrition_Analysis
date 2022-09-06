@@ -17,14 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-//  double? calories;
-  var val = 9;
-  void inc() {
-    setState(() {
-      val++;
-    });
-  }
-
   var _Nutrients = Get.put(NutrientsController());
   @override
   void initState() {
@@ -32,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     print("in home page init state");
     // print("init of homepage");
-    UpdateData.UpdateValues();
+    //  UpdateData.UpdateValues();
     _Nutrients.getNutrients();
   }
 
@@ -57,8 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     // mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                          onTap: () => inc(), child: Text(val.toString())),
                       GetBuilder<NutrientsController>(builder: (controller) {
                         return Text(
                           // _Nutrients.carbs
@@ -93,15 +83,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             text: "Add new Item"),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 6.0, left: 120.0),
-                      //   child: Button(
-                      //       function: () {
-                      //         UpdateData.UpdateValues();
-                      //         // _Nutrients.getNutrients();
-                      //       },
-                      //       text: "make 0"),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6.0, left: 120.0),
+                        child: Button(
+                            function: () {
+                              UpdateData.UpdateValues();
+                              _Nutrients.getNutrients();
+                            },
+                            text: "Reset Counter"),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),
                         child: Button(
@@ -137,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: size.width,
                   color: Color.fromARGB(255, 198, 191, 191),
                   child: _Nutrients.titless != null
-                      ? ListView.builder(
+                      ?   GetBuilder<NutrientsController>(builder: (controller) {
+                        return ListView.builder(
                           itemCount: _Nutrients.titless.length,
                           itemBuilder: (context, index) {
                             return Container(
@@ -149,10 +140,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(_Nutrients.titless[index]),
+                                  // child: GetBuilder<NutrientsController>(
+                                  //     builder: (controller) {
+                                  //   return Text(
+                                  //     // _Nutrients.carbs
+                                  //     _Nutrients.titless[index],
+                                  //   );
+                                  // }),
                                 ),
                               ),
                             );
-                          })
+                          });
+                      })
                       : Center(
                           child: Text("Nothing to show"),
                         ))

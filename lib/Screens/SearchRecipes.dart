@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nutritionanalysis/Components/RecipeItem.dart';
 import 'package:nutritionanalysis/Components/SearchBarWidget.dart';
 import 'package:nutritionanalysis/Screens/NoUserFound.dart';
+import 'package:nutritionanalysis/Screens/RecipeScreen.dart';
 import 'package:nutritionanalysis/Services/Api_Services.dart';
 import 'package:nutritionanalysis/model/RecipePageInfo.dart';
 
@@ -37,13 +38,24 @@ class _SearchRecipesState extends State<SearchRecipes> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        childAspectRatio: 2 / 3.3,
+                        childAspectRatio: 2 / 3.5,
                       ),
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                          onTap:(){
-                            print("in recipe widget");
-                            Get.to(()=>snapshot.data![index].id);
+                          onTap: () {
+                            print("ja raaaa");
+                            // print(snapshot.data![index].id);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RecipeScreen(
+                                        id: snapshot.data![index].id,
+                                      )),
+                            );
+                            //   Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) => NoUserFound()),
+                            // );
                           },
                           child: RecipeItem(
                             recipe: snapshot.data![index],

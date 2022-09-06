@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nutritionanalysis/model/Response_Model.dart';
 import 'package:nutritionanalysis/model/RecipePageInfo.dart';
+
+import '../Screens/RecipeScreen.dart';
 
 class RecipeItem extends StatelessWidget {
   final Results recipe;
@@ -13,7 +16,7 @@ class RecipeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.all(3),
       alignment: Alignment.topLeft,
       height: 400,
       width: 200,
@@ -23,13 +26,10 @@ class RecipeItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: Image.network(
-              recipe.image!,
-              height: 100,
-              width: 100,
-            ),
+          Image.network(
+            recipe.image!,
+            height: 100,
+            width: 100,
           ),
           Align(
               alignment: Alignment.topLeft,
@@ -39,7 +39,7 @@ class RecipeItem extends StatelessWidget {
                   Text(
                     recipe.title!,
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 4,
+                    maxLines: 3,
                     // "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
                     textAlign: TextAlign.start,
                     style: TextStyle(fontSize: 15),

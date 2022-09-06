@@ -64,12 +64,13 @@ class NutrientsController extends GetxController {
     int lenght = NutritionList.length;
     print(lenght);
     if (lenght == 0) {
-      return [""];
+      return [];
     } else {
       NutrientsModel model = NutritionList[lenght - 1];
       print(" get today list");
       print(model.titles);
       titless = model.titles;
+      update();
       return titless;
     }
 

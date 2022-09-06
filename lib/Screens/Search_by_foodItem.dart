@@ -17,20 +17,20 @@ class Search_by_foodItem extends StatefulWidget {
 }
 
 class _Search_by_foodItemState extends State<Search_by_foodItem> {
-  double? carbs;
-  double? protein;
-  double? fats;
-  List<String>? ListOfTodaysFood;
-    var _Nutrients=Get.put(NutrientsController());  
-@override
+  //double? carbs;
+ // double? protein;
+  //double? fats;
+  //List<String>? ListOfTodaysFood;
+  var _Nutrients = Get.put(NutrientsController());
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-     
   }
+
   @override
   Widget build(BuildContext context) {
-    NutrientsModel _model=NutrientsModel(calories: 0, carb: 0, titles: [""]);
+    NutrientsModel _model = NutrientsModel(calories: 0, carb: 0, titles: [""]);
 
     return Scaffold(
       backgroundColor: Colors.grey,
@@ -39,7 +39,7 @@ class _Search_by_foodItemState extends State<Search_by_foodItem> {
           const SizedBox(
             height: 20,
           ),
-         const Text(
+          const Text(
             "Search by food",
             style: TextStyle(
                 fontSize: 35, color: Colors.black, fontWeight: FontWeight.bold),
@@ -76,22 +76,26 @@ class _Search_by_foodItemState extends State<Search_by_foodItem> {
                       title: Card(child: Text(meal.name!)),
                     );
                   },
-                  onSuggestionSelected: (FoodResults suggestion)async {
+                  onSuggestionSelected: (FoodResults suggestion) async {
                     //this function will execute when user clicks on suggested meal
-                    int? id=suggestion.id;
-                   List<FoodNutrients> nutrnts= await Api_Services.getFoodNutrition(id: id);
-                  _model.calories=nutrnts[18].amount;
-                  _model.carb=nutrnts[6].amount;
-                  print("list of titles in fooditem");
-                  print(_Nutrients.titless);
-                  String ti=_Nutrients.titless.toString();
-                  List<String> lot=ti.split(',');
-                  lot.add(suggestion.name??"");
-                  _model.titles=lot;
-                //  print(_model.titles);
-              //    print("before add Nutrition");
-                    await  _Nutrients.addNutrition(nutrients: _model);
-                _Nutrients.getNutrients();
+                    int? id = suggestion.id;
+                    List<FoodNutrients> nutrnts =
+                        await Api_Services.getFoodNutrition(id: id);
+                    _model.calories = nutrnts[18].amount;
+                    _model.carb = nutrnts[6].amount;
+                    print("food calories${_model.calories}");
+                    print("food calories${_model.carb}");
+                    print("list of titles in fooditem");
+                    print(_Nutrients.titless);
+                    String ti = _Nutrients.titless.toString();
+                    List<String> lot = ti.split(',');
+                    lot.add(suggestion.name!);
+                    print("models title${_model.titles}");
+                    _model.titles=lot;
+                    //  print(_model.titles);
+                    //    print("before add Nutrition");
+                    await _Nutrients.addNutrition(nutrients: _model);
+                    _Nutrients.getNutrients();
                   },
                   noItemsFoundBuilder: (context) => const Center(
                     child: Text("No Meal Found"),
@@ -99,7 +103,6 @@ class _Search_by_foodItemState extends State<Search_by_foodItem> {
                   debounceDuration: const Duration(milliseconds: 400),
                 ),
               ),
-              Button(function: () {}, text: "Search"),
             ],
           ),
         ],

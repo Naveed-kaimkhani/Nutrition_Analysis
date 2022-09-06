@@ -38,7 +38,7 @@ class UpdateData {
     // print(currentDate);
     // print("stored value is ${storedDate}");
     // print(currentDate == storedDate);
-    if (currentDate != storedDate) {
+    if (currentDate == storedDate) {
       //update values
       List<Map<String, dynamic>> Nutrients = await DbHelper.queryRow(1);
       print(Nutrients[0]);
