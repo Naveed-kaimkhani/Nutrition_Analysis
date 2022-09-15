@@ -13,7 +13,8 @@ class RecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SafeArea(
+    return false?
+    SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
         child: FutureBuilder(
@@ -113,7 +114,7 @@ class RecipeScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 6.0, left: 6),
                       child: Text(
-                        snapshot.data!.instructions!,
+                        RemoveHtmlTags(snapshot.data!.instructions!),
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
@@ -128,7 +129,7 @@ class RecipeScreen extends StatelessWidget {
                       child: Text(
                         maxLines: 8,
                         overflow: TextOverflow.ellipsis,
-                        snapshot.data!.summary!,
+                        RemoveHtmlTags(snapshot.data!.summary!),
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
@@ -139,6 +140,67 @@ class RecipeScreen extends StatelessWidget {
               }
             }),
       )),
-    );
+    ):SafeArea(
+      child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+  actions: [
+     IconButton(
+              onPressed:(){}, icon:Icon(
+Icons.search,
+color: Colors.white, 
+),
+    ),
+  ],
+            leading: IconButton(
+              onPressed:(){}, icon:Icon(
+Icons.arrow_back_ios,
+color: Colors.white, 
+),
+    ),
+  
+    ),
+        body:SingleChildScrollView(
+      child: FutureBuilder(
+        future:  Api_Services.getRecipeInform(id: id),
+        builder: (context, AsyncSnapshot<RecipePageInfo> snapshot) {
+              if (snapshot.hasData) {
+              return Column(
+                children: [
+                   Image.network(snapshot.data!.image!,
+                   width: size.width,
+                   height: size.height/3,
+
+                   ),
+                   Column(
+                    children: [
+                      Text(
+                          snapshot.data!.title!,
+                          style:const TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                        ),
+                    ],
+                   )
+                ],
+              );
+              }
+              else{
+              return CircularProgressIndicator();
+              }
+              }
+        ),
+        )
+      ));
+  }
+
+  String RemoveHtmlTags(String htmlTags) {
+    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+    String parsedstring = htmlTags.replaceAll(exp, ' ');
+
+// // var doc = parse(htmlTags);
+// if(doc.documentElement != null){
+//     String parsedstring = doc.documentElement!.text;
+//   }
+    return parsedstring;
   }
 }

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:nutritionanalysis/model/Response_Model.dart';
-import 'package:nutritionanalysis/model/RecipePageInfo.dart';
-
-import '../Screens/RecipeScreen.dart';
 
 class RecipeItem extends StatelessWidget {
   final Results recipe;

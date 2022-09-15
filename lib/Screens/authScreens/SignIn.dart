@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:nutritionanalysis/Screens/HomeScreen.dart';
-import 'package:nutritionanalysis/Services/UpdateData.dart';
 import 'package:nutritionanalysis/Services/authentication_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,9 +20,8 @@ class _SignInState extends State<SignIn> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
-   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 //  SharedPreferences prefs = await SharedPreferences.getInstance();
-
 
   bool isLoading = false;
 
@@ -52,10 +51,10 @@ class _SignInState extends State<SignIn> {
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               k,
               inputfields(
-                  hint_text: "Enter Email", controller: emailController),
+                  hint_text: "Enter Email", controller: emailController,keyboardType:TextInputType.emailAddress ,),
               k,
               inputfields(
-                  hint_text: "Enter Password", controller: passwordController),
+                  hint_text: "Enter Password", controller: passwordController,keyboardType:TextInputType.text),
               k,
               Button(
                   function: () async {
@@ -71,15 +70,15 @@ class _SignInState extends State<SignIn> {
                       isLoading = false;
                     });
                     if (output == "SignIn Successfully") {
-                       
                       Get.to(() => HomeScreen());
                     } else {
-                      Get.snackbar(
-                        "Authentication Response",
-                        output,
-                        colorText: Colors.white,
-                        snackPosition: SnackPosition.BOTTOM,
-                      );
+                      // Get.snackbar(
+                      //   "Authentication Response",
+                      //   output,
+                      //   colorText: Colors.white,
+                      //   snackPosition: SnackPosition.BOTTOM,
+                      // );
+                      Fluttertoast.showToast(msg: output);
                     }
                   },
                   text: isLoading ? "Please Wait..." : "SignIn"),

@@ -10,9 +10,9 @@ class NutrientsController extends GetxController {
   }
 //dynamic currentIndex=0.obs;
 
-  dynamic caloriess = 0.obs;
-  dynamic carbss = 0.obs;
-  dynamic titless = <String>[].obs;
+  dynamic caloriess = 0;
+  dynamic carbss = 0;
+  dynamic titless = <String>[];
   static var NutritionList = <NutrientsModel>[].obs;
 
   Future<int?> addNutrition({NutrientsModel? nutrients}) async {
@@ -23,12 +23,12 @@ class NutrientsController extends GetxController {
     // print(Nutrientss.length??"0");
     // print(Nutrientss);
     //print("in add nutrition");
-    print(Nutrientss.isNotEmpty);
+    // print(Nutrientss.isNotEmpty);
     if (Nutrientss.isNotEmpty) {
       await DbHelper.update(nutrientsModel: nutrients);
-      print("add function ran sucesfflu in if");
+      // print("add function ran sucesfflu in if");
     } else {
-      print("add function ran sucesfflu in else");
+      // print("add function ran sucesfflu in else");
       return await DbHelper.insert(nutrients, "Nutrients");
     }
   }
@@ -38,22 +38,22 @@ class NutrientsController extends GetxController {
   // }
   void getNutrients() async {
     List<Map<String, dynamic>> Nutrients = await DbHelper.query();
-    print(Nutrients);
+  //  print(Nutrients);
     NutritionList.assignAll(
         Nutrients.map((data) => new NutrientsModel.fromJson(data)).toList());
-    print(NutritionList);
-    print(NutritionList.length);
+    // print(NutritionList);
+    // print(NutritionList.length);
     // print(NutritionList[0].calories??".....");
     if (NutritionList.length != 0) {
-      print("in if of getNutrients update wala method");
+      // print("in if of getNutrients update wala method");
       caloriess = NutritionList[0].calories;
       carbss = NutritionList[0].carb;
-      print("carbss me $carbss");
-      print("cal me $caloriess");
+      // print("carbss me $carbss");
+      // print("cal me $caloriess");
       update();
     }
     await getTodaysTitles();
-    print("get nutrients done");
+    // print("get nutrients done");
   }
 
   Future<List<String>?> getTodaysTitles() async {
@@ -62,13 +62,13 @@ class NutrientsController extends GetxController {
     NutritionList.assignAll(
         Nutrients.map((data) => new NutrientsModel.fromJson(data)).toList());
     int lenght = NutritionList.length;
-    print(lenght);
+    // print(lenght);
     if (lenght == 0) {
       return [];
     } else {
       NutrientsModel model = NutritionList[lenght - 1];
-      print(" get today list");
-      print(model.titles);
+      // print(" get today list");
+      // print(model.titles);
       titless = model.titles;
       update();
       return titless;

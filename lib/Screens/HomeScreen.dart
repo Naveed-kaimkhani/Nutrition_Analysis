@@ -18,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var _Nutrients = Get.put(NutrientsController());
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -51,8 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       GetBuilder<NutrientsController>(builder: (controller) {
                         return Text(
-                          // _Nutrients.carbs
-                          "Carbs: ${_Nutrients.carbss}",
+                          // _Nutrients.carbs 
+                       // "Carbs: ${double.parse(controller.carbss).round()}",
+                         "Carbs: ${controller.carbss}",
+
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -65,7 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       GetBuilder<NutrientsController>(builder: (controller) {
                         return Text(
                           // _Nutrients.carbs
-                          "Calories: ${controller.caloriess}",
+                         "Calories: ${controller.caloriess}",
+
+                          //"Calories: ${double.parse(controller.caloriess).round().toString()}",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

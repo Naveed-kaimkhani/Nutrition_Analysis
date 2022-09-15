@@ -16,7 +16,7 @@ class UpdateData {
     String currentDate = DateFormat('dd-MM-yyyy').format(now);
 
     prefs.setString("currentDate", currentDate);
-    print("date seted");
+    // print("date seted");
   }
 
   static String getCurrentDate() {
@@ -24,7 +24,7 @@ class UpdateData {
     final now = DateTime.now();
     String currentDate = DateFormat('dd-MM-yyyy').format(now);
     //String? StoredDate= prefs.getString("currentDate");
-    print("in get currentdate func $currentDate");
+    // print("in get currentdate func $currentDate");
     return currentDate;
   }
 
@@ -33,22 +33,22 @@ class UpdateData {
 
     String currentDate = getCurrentDate();
     String? storedDate = prefs.getString("currentDate");
-    print("update valeus func $storedDate");
-    print("in update values func");
+    // print("update valeus func $storedDate");
+    // print("in update values func");
     // print(currentDate);
     // print("stored value is ${storedDate}");
     // print(currentDate == storedDate);
     if (currentDate == storedDate) {
       //update values
       List<Map<String, dynamic>> Nutrients = await DbHelper.queryRow(1);
-      print(Nutrients[0]);
+      // print(Nutrients[0]);
       NutrientsModel nutrientsModel = NutrientsModel.fromJson(Nutrients[0]);
       await DbHelper.insert(nutrientsModel, "LastWeek");
       await DbHelper.ResetNutrientsCounter();
       //  _Nutrients.getNutrients();
       prefs.setString("currentDate", currentDate);
-      print("values 0");
+      // print("values 0");
     }
-    print("not in if");
+    // print("not in if");
   }
 }

@@ -26,9 +26,9 @@ class DbHelper {
         return db.execute('''CREATE TABLE $_lastWeek(
         id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
       });
-      print("database initilize");
+      // print("database initilize");
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 //  void _createDb(Database db, int newVersion) async {
@@ -41,29 +41,29 @@ class DbHelper {
 //   }
   static Future<int?> insert(
       NutrientsModel? nutrients, String _tablename) async {
-    print("insert function called");
+    // print("insert function called");
     await db?.insert(_tablename, NutrientsModel.tojson(model: nutrients));
     //_Nutrients.getNutrients();
     return 1;
   }
 
   static Future<List<Map<String, dynamic>>> query() async {
-    print("query function called");
+    // print("query function called");
     return await db!.query(_tablename);
   }
 
   static Future<List<Map<String, Object?>>> queryRow(int id) async {
-    print("query function called");
+    // print("query function called");
     return await db!.rawQuery('SELECT * FROM $_tablename WHERE id =?', [id]);
   }
 
   static Future<int> update({NutrientsModel? nutrientsModel}) {
-    print("chal bhaiii");
-    print(_Nutrients.caloriess);
-    print(nutrientsModel!.calories);
+    // print("chal bhaiii");
+    // print(_Nutrients.caloriess);
+    // print(nutrientsModel!.calories);
     double newCalories = _Nutrients.caloriess + nutrientsModel!.calories;
     double newCarb = _Nutrients.carbss + nutrientsModel.carb;
-    print("new values ${newCalories}");
+    // print("new values ${newCalories}");
     String titless = nutrientsModel.titles!.join(',');
     var res = db!.update(_tablename,
         {"calories": newCalories, "carb": newCarb, "titles": titless},

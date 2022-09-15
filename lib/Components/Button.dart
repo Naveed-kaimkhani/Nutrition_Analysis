@@ -12,18 +12,19 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 40,
+    return GestureDetector(
+      onTap: function,
+      child: Container(
+        height: 60,
         width: 150,
         color: Colors.black,
-        child: GestureDetector(
-          onTap: function,
-          child: Center(
-            child: Text(
-              text!,
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
+        child: Center(
+          child: Text(
+            text!,
+            style: TextStyle(color: Colors.white, fontSize: 18),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
