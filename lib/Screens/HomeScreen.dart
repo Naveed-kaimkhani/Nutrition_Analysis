@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var _Nutrients = Get.put(NutrientsController());
-  
+
   @override
   void initState() {
     // TODO: implement initState
@@ -45,16 +45,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.grey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 40.0),
+                      vertical: 8.0, horizontal: 40.0),
                   child: Column(
                     // mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GetBuilder<NutrientsController>(builder: (controller) {
                         return Text(
-                          // _Nutrients.carbs 
-                       // "Carbs: ${double.parse(controller.carbss).round()}",
-                         "Carbs: ${controller.carbss}",
+                          // _Nutrients.carbs
+                          // "Carbs: ${double.parse(controller.carbss).round()}",
+                          "Carbs: ${controller.carbss}",
 
                           style: const TextStyle(
                             fontSize: 20,
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       GetBuilder<NutrientsController>(builder: (controller) {
                         return Text(
                           // _Nutrients.carbs
-                         "Calories: ${controller.caloriess}",
+                          "Calories: ${controller.caloriess}",
 
                           //"Calories: ${double.parse(controller.caloriess).round().toString()}",
                           style: const TextStyle(
@@ -88,15 +88,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             text: "Add new Item"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 6.0, left: 120.0),
-                        child: Button(
-                            function: () {
-                              UpdateData.UpdateValues();
-                              _Nutrients.getNutrients();
-                            },
-                            text: "Reset Counter"),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 6.0, left: 120.0),
+                      //   child: Button(
+                      //       function: () {
+                      //         UpdateData.UpdateValues();
+                      //         _Nutrients.getNutrients();
+                      //       },
+                      //       text: "Reset Counter"),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0, left: 120.0),
                         child: Button(
@@ -132,31 +132,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: size.width,
                   color: Color.fromARGB(255, 198, 191, 191),
                   child: _Nutrients.titless != null
-                      ?   GetBuilder<NutrientsController>(builder: (controller) {
-                        return ListView.builder(
-                          itemCount: _Nutrients.titless.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              height: 50,
-                              width: 50,
-                              //   color: Colors.grey,
-                              child: Card(
-                                color: Colors.grey,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(_Nutrients.titless[index]),
-                                  // child: GetBuilder<NutrientsController>(
-                                  //     builder: (controller) {
-                                  //   return Text(
-                                  //     // _Nutrients.carbs
-                                  //     _Nutrients.titless[index],
-                                  //   );
-                                  // }),
-                                ),
-                              ),
-                            );
-                          });
-                      })
+                      ? GetBuilder<NutrientsController>(builder: (controller) {
+                          return ListView.builder(
+                              itemCount: _Nutrients.titless.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  height: 50,
+                                  width: 50,
+                                  //   color: Colors.grey,
+                                  child: Card(
+                                    color: Colors.grey,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(_Nutrients.titless[index]),
+                                      // child: GetBuilder<NutrientsController>(
+                                      //     builder: (controller) {
+                                      //   return Text(
+                                      //     // _Nutrients.carbs
+                                      //     _Nutrients.titless[index],
+                                      //   );
+                                      // }),
+                                    ),
+                                  ),
+                                );
+                              });
+                        })
                       : Center(
                           child: Text("Nothing to show"),
                         ))
