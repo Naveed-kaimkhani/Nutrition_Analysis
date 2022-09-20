@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nutritionanalysis/Components/RecipeItem.dart';
 import 'package:nutritionanalysis/Components/SearchBarWidget.dart';
+import 'package:nutritionanalysis/Components/ShowRecipeWidget.dart';
 import 'package:nutritionanalysis/Screens/NoUserFound.dart';
 import 'package:nutritionanalysis/Screens/RecipeScreen.dart';
 import 'package:nutritionanalysis/Services/Api_Services.dart';
@@ -22,7 +23,8 @@ class _SearchRecipesState extends State<SearchRecipes> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return 
+    SafeArea(
       child: Scaffold(
           appBar: SearchBarWidget(
             hasBackButton: false,
@@ -42,25 +44,27 @@ class _SearchRecipesState extends State<SearchRecipes> {
                       ),
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                          onTap: () {
-                            print("ja raaaa");
-                            // print(snapshot.data![index].id);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RecipeScreen(
-                                        id: snapshot.data![index].id,
-                                      )),
-                            );
-                            //   Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => NoUserFound()),
-                            // );
-                          },
-                          child: RecipeItem(
-                            recipe: snapshot.data![index],
-                          ),
-                        );
+                            onTap: () {
+                              print("ja raaaa");
+                              // print(snapshot.data![index].id);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RecipeScreen(
+                                          id: snapshot.data![index].id,
+                                        )),
+                              );
+                              //   Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => NoUserFound()),
+                              // );
+                            },
+                            child:
+                                 RecipeItem(
+                                  recipe: snapshot.data![index],
+                                ));
+                                // ShowRecipeWidget(
+                                //     recipe: snapshot.data![index]));
                       });
                 } else {
                   return Center(child: CircularProgressIndicator());

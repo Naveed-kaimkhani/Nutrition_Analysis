@@ -14,7 +14,7 @@ class RecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return false
+    return true
         ? SafeArea(
             child: Scaffold(
                 body: SingleChildScrollView(
@@ -164,7 +164,9 @@ class RecipeScreen extends StatelessWidget {
                     ),
                   ],
                   leading: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
@@ -178,6 +180,7 @@ class RecipeScreen extends StatelessWidget {
                           (context, AsyncSnapshot<RecipePageInfo> snapshot) {
                         if (snapshot.hasData) {
                           return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Image.network(
                                 snapshot.data!.image!,
@@ -251,11 +254,124 @@ class RecipeScreen extends StatelessWidget {
                                 height: 10,
                               ),
                               // Text("fdfdfd"),`
-                              Divider(
-                                color: Colors.grey,
-                                indent: 16,
-                                endIndent: 16,
-                              )
+                              const Divider(
+                                thickness: 7.0,
+                                color: Color.fromARGB(255, 239, 232, 232),
+                                //  indent: 16,
+                                //endIndent: 16,
+                              ),
+
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8.0, top: 8.0),
+                                child: Text("Meal Items",
+                                    style: TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              //Text("hahahh"),
+                              SizedBox(
+                                height: size.height / 3,
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    padding: EdgeInsets.zero,
+                                    itemCount: snapshot
+                                        .data!.extendedIngredients!.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          // //crossAxisAlignment:
+                                          // //CrossAxisAlignment.start,
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.start,
+                                          children: [
+                                            // Image.network(snapshot.data!
+                                            //     .extendedIngredients![index].image!),
+                                            Text(
+                                              "${snapshot.data!.extendedIngredients![index].name!}  ",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                //fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                            // SizedBox(
+                                            //   width: 10,
+                                            // ),
+                                            Text(
+                                              "${snapshot.data!.extendedIngredients![index].amount!.toString()} ${snapshot.data!.extendedIngredients![index].unit!.toString()}",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            // Text(snapshot
+                                            //     .data!
+                                            //     .extendedIngredients![index]
+                                            //     .unit!
+                                            //     .toString())
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                              ),
+                              const Divider(
+                                thickness: 7.0,
+                                color: Color.fromARGB(255, 239, 232, 232),
+                                //  indent: 16,
+                                //endIndent: 16,
+                              ),
+                              const Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8.0, top: 8.0),
+                                child: Text("Instructions",
+                                    style: TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, top: 8, right: 6, bottom: 6),
+                                child: Text(
+                                  RemoveHtmlTags(
+                                    snapshot.data!.instructions!,
+                                  ),
+                                  // maxLines: 4,
+                                  //overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 7.0,
+                                color: Color.fromARGB(255, 239, 232, 232),
+                                //  indent: 16,
+                                //endIndent: 16,
+                              ),
+                              const Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 8.0, top: 8.0),
+                                child: Text("Summary",
+                                    style: TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, top: 8, right: 6, bottom: 6),
+                                child: Text(
+                                  RemoveHtmlTags(
+                                    snapshot.data!.summary!,
+                                  ),
+                                  maxLines: 5,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
                             ],
                           );
                         } else {
