@@ -18,9 +18,8 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
   final Size preferredSize;
 
   OutlineInputBorder border = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(7),
+    borderRadius: BorderRadius.circular(27),
     borderSide: const BorderSide(
-      color: Colors.grey,
       width: 1,
     ),
   );
@@ -29,10 +28,7 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Container(
-      height: 80,
-      decoration: const BoxDecoration(
-        color: Colors.grey,
-      ),
+      height: 45,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -78,7 +74,7 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
                   hintText: "Search for Recipes",
                   fillColor: Colors.white,
                   filled: true,
-                  border: border,
+                  //  border: border,
                   focusedBorder: border,
                 ),
               ),

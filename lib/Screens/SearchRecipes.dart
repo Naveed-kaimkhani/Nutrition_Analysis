@@ -22,13 +22,42 @@ class _SearchRecipesState extends State<SearchRecipes> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          appBar: SearchBarWidget(
-            hasBackButton: false,
-            isReadOnly: true,
-          ),
-          body: FutureBuilder(
+    return Scaffold(
+        body: SingleChildScrollView(
+            child: Column(children: [
+      Container(
+        margin: EdgeInsets.only(top: 50),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 120, top: 10),
+              child: ListTile(
+                title: Text(
+                  "Choose a diet",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text("make your life healthy, by a perfect diet"),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 40),
+              child: SearchBarWidget(
+                hasBackButton: false,
+                isReadOnly: true,
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Container(
+          height: 500,
+          child: FutureBuilder(
               future: Api_Services.getKetoRecipes(),
               builder: (context, AsyncSnapshot<List<Results>> snapshot) {
                 if (snapshot.hasData) {
@@ -37,8 +66,8 @@ class _SearchRecipesState extends State<SearchRecipes> {
                       itemCount: snapshot.data!.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        childAspectRatio: 2 / 3.5,
+                        crossAxisCount: 2,
+                        childAspectRatio: 2 / 2.5,
                       ),
                       itemBuilder: (context, index) {
                         return GestureDetector(
@@ -66,6 +95,6 @@ class _SearchRecipesState extends State<SearchRecipes> {
                   return Center(child: CircularProgressIndicator());
                 }
               })),
-    );
+    ])));
   }
 }

@@ -9,7 +9,10 @@ class Search_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: SearchBarWidget(isReadOnly: false, hasBackButton:true),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SearchBarWidget(isReadOnly: false, hasBackButton: true),
+        ),
       ),
     );
   }

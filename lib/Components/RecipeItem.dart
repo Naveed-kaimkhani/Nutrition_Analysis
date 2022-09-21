@@ -14,45 +14,58 @@ class RecipeItem extends StatelessWidget {
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(3),
       alignment: Alignment.topLeft,
-      height: 400,
+      height: 100,
       width: 200,
       decoration: BoxDecoration(
         color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         children: [
-          Image.network(
-            recipe.image!,
-            height: 100,
-            width: 100,
-          ),
-          Align(
-              alignment: Alignment.topLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    recipe.title!,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3,
-                    // "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 2),
-                    child: Text(
-                        "Carbs:${recipe.nutrition!.nutrients![2].amount!.round().toString()} g",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ),
-                ],
-              )),
+          Stack(children:[ Text(
+                      recipe.title!,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                      // "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        wordSpacing: 3,
+                      ),),        //           ),Image.network(recipe.image!, fit: BoxFit.contain)]),
+          // Align(
+          //     alignment: Alignment.topLeft,
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Padding(
+          //           padding: EdgeInsets.only(top: 12),
+          //           child: Text(
+          //             recipe.title!,
+          //             overflow: TextOverflow.ellipsis,
+          //             maxLines: 3,
+          //             // "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+          //             textAlign: TextAlign.start,
+          //             style: TextStyle(
+          //               fontSize: 16,
+          //               fontWeight: FontWeight.bold,
+          //               wordSpacing: 3,
+          //             ),
+          //           ),
+          //         ),
+          //         Padding(
+          //           padding: EdgeInsets.only(top: 2),
+          //           child: Text(
+          //               "Carbs:${recipe.nutrition!.nutrients![2].amount!.round().toString()} g",
+          //               style: TextStyle(
+          //                   //    fontWeight: FontWeight.bold,
+          //                   )),
+          //         ),
+          //       ],
+          //     )),
           SizedBox(height: 3),
-        ],
-      ),
+      ],),])
+          
     );
   }
 }
