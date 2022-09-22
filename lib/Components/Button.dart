@@ -15,9 +15,11 @@ class Button extends StatelessWidget {
     return GestureDetector(
       onTap: function,
       child: Container(
-        height: 60,
+        decoration: BoxDecoration(
+            color: Colors.blueAccent, borderRadius: BorderRadius.circular(30)),
+        height: 40,
         width: 150,
-        color: Colors.black,
+        // color: Colors.black,
         child: Center(
           child: Text(
             text!,

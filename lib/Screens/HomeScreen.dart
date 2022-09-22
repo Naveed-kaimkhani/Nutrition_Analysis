@@ -19,6 +19,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var _Nutrients = Get.put(NutrientsController());
+   final dataMap = <String, double>{
+    "Flutter": 5,
+    "React": 3,
+    "Xamarin": 2,
+    "Ionic": 2,
+  };
+  
+
 
   @override
   void initState() {
@@ -40,39 +48,126 @@ class _HomeScreenState extends State<HomeScreen> {
             // mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 100, right: 200.0),
+                child: ListTile(
+                  title: Text(
+                    "Hi, Naveed",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text("todays date"),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 40, top: 70.0),
+                child: Row(
+                  children: [
+                    Button(
+                        function: () {
+                          Get.to(() => TabBarScreen());
+                        },
+                        text: "Add new Item"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Button(
+                        function: () async {
+                          //await  FirebaseAuth.instance.signOut();
+                          User? user = FirebaseAuth.instance.currentUser;
+
+                          if (user == null) {
+                            Get.to(() => NoUserFound());
+                          } else {
+                            Get.to(() => SearchRecipes());
+                          }
+                          //      Get.to(() => TabBarScreen());
+                        },
+                        text: "Search Recipes"),
+                  ],
+                ),
+              ),
               Container(
-                margin: EdgeInsets.only(top: 110),
+                margin: EdgeInsets.only(top: 20),
                 decoration: BoxDecoration(
                     color: Color(0xFFB9FAFA),
                     borderRadius: BorderRadius.circular(40)),
                 height: size.height / 3,
                 width: size.width,
                 //   color: Colors.grey,
+
+                //   color: Colors.grey,
                 child: Row(
                   children: [
-                    Text("Calories"),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: new CircularPercentIndicator(
-                          radius: 60.0,
-                          lineWidth: 5.0,
-                          percent: 1.0,
-                          center: new Text("100%"),
-                          progressColor: Colors.green,
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GetBuilder<NutrientsController>(
+                              builder: (controller) {
+                            return Text(
+                              // _Nutrients.carbs
+                              // "Carbs: ${double.parse(controller.carbss).round()}",
+                              "Carbs: ${controller.carbss}",
+
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          }),
+                          GetBuilder<NutrientsController>(
+                              builder: (controller) {
+                            return Text(
+                              // _Nutrients.carbs
+                              "Calories: ${controller.caloriess}",
+
+                              //"Calories: ${double.parse(controller.caloriess).round().toString()}",
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          }),
+                        ],
                       ),
                     ),
-                    Text("Carbs"),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Center(
+                      child: new CircularPercentIndicator(
+                        radius: 60.0,
+                        lineWidth: 5.0,
+                        percent: 1.0,
+                        center: new Text("100%"),
+                        progressColor: Colors.green,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
                   ],
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 20,
+              ),
+              ListTile(
+                title: Text(
+                  "Today's Food",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
               ),
               Container(
                   decoration: BoxDecoration(
-                      color: Color(0xFFB9FAFA),
+                      //  color: Color(0xFFB9FAFA),
                       borderRadius: BorderRadius.circular(40)),
                   height: size.height / 3,
                   width: size.width,
@@ -82,26 +177,29 @@ class _HomeScreenState extends State<HomeScreen> {
                           return ListView.builder(
                               itemCount: _Nutrients.titless.length,
                               itemBuilder: (context, index) {
-                                return SizedBox();
-                                // return Container(
-                                //   // height: 50,
-                                //   // width: 50,
-                                //   //   color: Colors.grey,
-                                //   child: Card(
-                                //     //   color: Colors.grey,
-                                //     child: Padding(
-                                //       padding: const EdgeInsets.all(8.0),
-                                //       //  child: Text(_Nutrients.titless[index]),
-                                //       // child: GetBuilder<NutrientsController>(
-                                //       //     builder: (controller) {
-                                //       //   return Text(
-                                //       //     // _Nutrients.carbs
-                                //       //     _Nutrients.titless[index],
-                                //       //   );
-                                //       // }),
-                                //     ),
-                                //   ),
-                                // );
+                                return Container(
+                                  height: 50,
+                                  width: 50,
+                                  //   color: Colors.grey,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFFB9FAFA),
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    //   color: Colors.grey,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(18.0),
+                                      //  child: Text(_Nutrients.titless[index]),
+                                      child: GetBuilder<NutrientsController>(
+                                          builder: (controller) {
+                                        return Text(
+                                          // _Nutrients.carbs
+                                          _Nutrients.titless[index],
+                                        );
+                                      }),
+                                    ),
+                                  ),
+                                );
                               });
                         })
                       : Center(
