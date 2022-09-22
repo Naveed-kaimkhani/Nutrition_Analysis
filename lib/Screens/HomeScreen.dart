@@ -48,13 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: size.height / 3,
                 width: size.width,
                 //   color: Colors.grey,
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
+                    Text("Calories"),
                     Center(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 40),
+                        padding: const EdgeInsets.only(top: 10),
                         child: new CircularPercentIndicator(
                           radius: 60.0,
                           lineWidth: 5.0,
@@ -64,81 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    // GetBuilder<NutrientsController>(builder: (controller) {
-                    //   // return Text(
-                    //   //   // _Nutrients.carbs
-                    //   //   // "Carbs: ${double.parse(controller.carbss).round()}",
-                    //   //   "Carbs: ${controller.carbss}",
-
-                    //   //   style: const TextStyle(
-                    //   //     fontSize: 20,
-                    //   //     fontWeight: FontWeight.bold,
-                    //   //   ),
-                    //   // );
-                    // }),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // GetBuilder<NutrientsController>(builder: (controller) {
-                    //   return Text(
-                    //     // _Nutrients.carbs
-                    //     "Calories: ${controller.caloriess}",
-
-                    //     //"Calories: ${double.parse(controller.caloriess).round().toString()}",
-                    //     style: const TextStyle(
-                    //       fontSize: 20,
-                    //       fontWeight: FontWeight.bold,
-                    //     ),
-                    //   );
-                    // }),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    // Padding(
-                    //   padding:
-                    //       const EdgeInsets.only(top: 10.0, left: 120.0),
-                    //   child: Button(
-                    //       function: () {
-                    //         Get.to(() => TabBarScreen());
-                    //       },
-                    //       text: "Add new Item"),
-                    // ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(top: 6.0, left: 120.0),
-                    //   child: Button(
-                    //       function: () {
-                    //         UpdateData.UpdateValues();
-                    //         _Nutrients.getNutrients();
-                    //       },
-                    //       text: "Reset Counter"),
-                    // ),
-                    // Padding(
-                    //   padding:
-                    //       const EdgeInsets.only(top: 10.0, left: 120.0),
-                    //   child: Button(
-                    //       function: () async {
-                    //         //await  FirebaseAuth.instance.signOut();
-                    //         User? user = FirebaseAuth.instance.currentUser;
-
-                    //         if (user == null) {
-                    //           Get.to(() => NoUserFound());
-                    //         } else {
-                    //           Get.to(() => SearchRecipes());
-                    //         }
-                    //         //      Get.to(() => TabBarScreen());
-                    //       },
-                    //       text: "Search Recipes"),
-                    // ),
-                    const SizedBox(
-                      height: 38,
-                    ),
-                    // Text(
-                    //   "Today's Food",
-                    //   style: TextStyle(
-                    //     fontSize: 20,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
+                    Text("Carbs"),
                   ],
                 ),
               ),
