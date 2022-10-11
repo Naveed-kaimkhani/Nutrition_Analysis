@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:nutritionanalysis/Components/search_bar_header.dart';
+import 'package:nutritionanalysis/Constant/globlevariables.dart';
+import 'package:nutritionanalysis/Screens/Search_by_foodItem.dart';
 
-import '../Components/SearchBarWidget.dart';
 
 class Search_Screen extends StatelessWidget {
   const Search_Screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: SearchBarWidget(isReadOnly: false, hasBackButton:true),
+    return Scaffold(
+    backgroundColor: globalVariables.backgroundColor,
+      appBar: const CustomAppBar(),
+      body: Column(
+        children: const [
+         search_bar_header()
+        ],
       ),
     );
   }

@@ -37,10 +37,10 @@ class _SignUpState extends State<SignUp> {
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               k,
               inputfields(
-                  hint_text: "Enter Email", controller: emailController,keyboardType: TextInputType.emailAddress,),
+                  hint_text: "Enter Email", controller: emailController,),
               k,
               inputfields(
-                  hint_text: "Enter Password", controller: passwordController,keyboardType: TextInputType.text,),
+                  hint_text: "Enter Password", controller: passwordController),
               k,
               Button(
                   function: () async {

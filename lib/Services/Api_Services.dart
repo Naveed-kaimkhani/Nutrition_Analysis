@@ -36,7 +36,7 @@ class Api_Services {
 
   static Future<List<Results>> getKetoRecipes() async {
     String url =
-        "https://api.spoonacular.com/recipes/complexSearch?diet=Ketogenic&maxFat=100&maxProtein=100&maxCarbs=200&number=30&apiKey=${ApiKeyyy}";
+        "https://api.spoonacular.com/recipes/complexSearch?diet=Ketogenic&maxFat=100&maxProtein=100&maxCarbs=200&number=30&apiKey=${ApiKey}";
     http.Response response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       var meals = json.decode(response.body);
@@ -119,7 +119,7 @@ class Api_Services {
     String parameter = "/information?includeNutrition=true&apiKey=";
     //https://api.spoonacular.com/recipes/716429/information?includeNutrition=true&apiKey=c020b400a8244106a0b807006800605b
     http.Response response =
-        await http.get(Uri.parse('$baseUrl$id$parameter$ApiKeyy'));
+        await http.get(Uri.parse('$baseUrl$id$parameter$ApiKey'));
     if (response.statusCode == 200) {
       print("in if");
       var recipeInfo = json.decode(response.body);

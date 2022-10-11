@@ -3,11 +3,14 @@ import 'package:nutritionanalysis/Services/NutrientsController.dart';
 import 'package:nutritionanalysis/model/NutrientsModel.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../model/TodaysListFoodModel.dart';
+
 class DbHelper {
   static Database? db;
-  static final int _version = 1;
-  static final String _tablename = "Nutrients";
-  static final String _lastWeek = "LastWeek";
+  static const int _version = 1;
+  static const String _tablename = "Nutrients";
+  static const String _lastWeek = "LastWeek";
+ static const String _todayfoodlist = "todayfoodlist";
 
   static var _Nutrients = Get.put(NutrientsController());
 
@@ -23,6 +26,8 @@ class DbHelper {
         print("creating a new one");
         await db.execute('''CREATE TABLE $_tablename(
         id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
+        await db.execute('''CREATE TABLE $_todayfoodlist(
+        id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , title String , fat DOUBLE , protein DOUBLE);''');
         return db.execute('''CREATE TABLE $_lastWeek(
         id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
       });
@@ -46,10 +51,15 @@ class DbHelper {
     //_Nutrients.getNutrients();
     return 1;
   }
+static Future<int?> insertToTodayList(
+      TodaysListFoodModel? nutrients, String _tablename) async {
+    await db?.insert(_tablename, TodaysListFoodModel.tojson(model: nutrients));
+    return 1;
+  }
 
-  static Future<List<Map<String, dynamic>>> query() async {
+  static Future<List<Map<String, dynamic>>> query(String? tableName) async {
     // print("query function called");
-    return await db!.query(_tablename);
+    return await db!.query(tableName!);
   }
 
   static Future<List<Map<String, Object?>>> queryRow(int id) async {

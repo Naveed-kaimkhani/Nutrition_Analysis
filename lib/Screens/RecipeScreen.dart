@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nutritionanalysis/Constant/globlevariables.dart';
 import 'package:nutritionanalysis/model/RecipePageInfo.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import '../Components/recipelables.dart';
 import '../Services/Api_Services.dart';
 import '../model/RecipeInfo.dart';
 
@@ -14,7 +17,7 @@ class RecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return true
+    return false
         ? SafeArea(
             child: Scaffold(
                 body: SingleChildScrollView(
@@ -150,62 +153,74 @@ class RecipeScreen extends StatelessWidget {
           )
         : SafeArea(
             child: Scaffold(
+                backgroundColor: globalVariables.backgroundColor,
                 extendBodyBehindAppBar: true,
-                appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  actions: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                  leading: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                body: SingleChildScrollView(
-                  child: FutureBuilder(
-                      future: Api_Services.getRecipeInform(id: id),
-                      builder:
-                          (context, AsyncSnapshot<RecipePageInfo> snapshot) {
-                        if (snapshot.hasData) {
-                          return Column(
+                // appBar: AppBar(
+                //   backgroundColor: Colors.transparent,
+                //   elevation: 0,
+                //   leading: IconButton(
+                //     onPressed: () {
+                //       Navigator.pop(context);
+                //     },
+                //     icon: Padding(
+                //       padding: const EdgeInsets.all(3.0),
+                //       child: Image.asset('lib/asset/back 1.png'),
+                //     ),
+                //   ),
+                // ),
+                body: FutureBuilder(
+                    future: Api_Services.getRecipeInform(id: id),
+                    builder: (context, AsyncSnapshot<RecipePageInfo> snapshot) {
+                      if (snapshot.hasData) {
+                        return SingleChildScrollView(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.network(
-                                snapshot.data!.image!,
-                                width: size.width,
-                                height: size.height / 4,
-                                fit: BoxFit.cover,
+                              Stack(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    icon: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Positioned(
+                                        top: 10,
+                                        left: 10,
+                                        child: Image.asset(
+                                          'lib/asset/back 1.png',
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Image.network(
+                                    snapshot.data!.image!,
+                                    width: size.width,
+                                    height: size.height / 4,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(6.0),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w, vertical: 20.h),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       snapshot.data!.title!,
-                                      style: const TextStyle(
-                                          fontSize: 25,
+                                      style: TextStyle(
+                                          fontSize: 35.sp,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text("Number of servings",
+                                        Text("  Number of servings",
                                             style: TextStyle(
-                                                fontSize: 18,
+                                                fontSize: 20.sp,
                                                 color: Colors.black)),
                                         Text(
                                             snapshot.data!.servings.toString()),
@@ -214,125 +229,99 @@ class RecipeScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomprogressIndicator(
-                                      percent: "30",
-                                      title: "Calories",
-                                      LoadingColor: Colors.blueGrey,
-                                      ProgressColor: Colors.blueAccent,
-                                    ),
-                                    CustomprogressIndicator(
-                                      percent: "40",
-                                      title: "Protein",
-                                      ProgressColor: Colors.amber,
-                                      LoadingColor: Colors.amber[200],
-                                    ),
-                                    CustomprogressIndicator(
-                                      percent: "40",
-                                      title: "Carb",
-                                      ProgressColor: Colors.green,
-                                      LoadingColor: Colors.green[200],
-                                    ),
-                                    CustomprogressIndicator(
-                                      percent: "40",
-                                      title: "Fat",
-                                      ProgressColor: Colors.red,
-                                      LoadingColor: Colors.red[100],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              // Text("fdfdfd"),`
-                              const Divider(
-                                thickness: 7.0,
-                                color: Color.fromARGB(255, 239, 232, 232),
-                                //  indent: 16,
-                                //endIndent: 16,
+                              // SizedBox(
+                              //   height: 10,
+                              // ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(16.0),
+                              //   child: Row(
+                              //     mainAxisAlignment:
+                              //         MainAxisAlignment.spaceBetween,
+                              //     children: [],
+                              //   ),
+                              // ),
+                              // SizedBox(
+                              //   height: 10,
+                              // ),
+                              // // Text("fdfdfd"),`
+                              // const Divider(
+                              //   thickness: 7.0,
+                              //   color: Color.fromARGB(255, 239, 232, 232),
+                              //   //  indent: 16,
+                              //   //endIndent: 16,
+                              // ),
+                              Recipelables(
+                                title: "Ingredients",
                               ),
 
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 8.0, top: 8.0),
-                                child: Text("Meal Items",
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold)),
-                              ),
                               //Text("hahahh"),
-                              SizedBox(
-                                height: size.height / 3,
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    padding: EdgeInsets.zero,
-                                    itemCount: snapshot
-                                        .data!.extendedIngredients!.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          // //crossAxisAlignment:
-                                          // //CrossAxisAlignment.start,
-                                          // mainAxisAlignment:
-                                          //     MainAxisAlignment.start,
-                                          children: [
-                                            // Image.network(snapshot.data!
-                                            //     .extendedIngredients![index].image!),
-                                            Text(
-                                              "${snapshot.data!.extendedIngredients![index].name!}  ",
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                //fontWeight: FontWeight.bold
-                                              ),
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.zero,
+                                  itemCount: snapshot
+                                      .data!.extendedIngredients!.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 30.0, vertical: 6.w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        // //crossAxisAlignment:
+                                        // //CrossAxisAlignment.start,
+                                        // mainAxisAlignment:
+                                        //     MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            height: 10,
+                                            width: 10,
+                                            decoration: BoxDecoration(
+                                              color: globalVariables.greyColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
                                             ),
-                                            // SizedBox(
-                                            //   width: 10,
-                                            // ),
-                                            Text(
-                                              "${snapshot.data!.extendedIngredients![index].amount!.toString()} ${snapshot.data!.extendedIngredients![index].unit!.toString()}",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
+                                          ),
+                                          // Image.network(snapshot.data!
+                                          //     .extendedIngredients![index].image!),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          Text(
+                                            "${snapshot.data!.extendedIngredients![index].name!}  ",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              //fontWeight: FontWeight.bold
                                             ),
-                                            // Text(snapshot
-                                            //     .data!
-                                            //     .extendedIngredients![index]
-                                            //     .unit!
-                                            //     .toString())
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                              ),
-                              const Divider(
-                                thickness: 7.0,
-                                color: Color.fromARGB(255, 239, 232, 232),
-                                //  indent: 16,
-                                //endIndent: 16,
-                              ),
-                              const Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 8.0, top: 8.0),
-                                child: Text("Instructions",
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold)),
-                              ),
+                                          ),
+                                          // SizedBox(
+                                          //   width: 40.w,
+                                          // ),
+                                          Spacer(),
+                                          Text(
+                                            "${snapshot.data!.extendedIngredients![index].amount!.toString()} ${snapshot.data!.extendedIngredients![index].unit!.toString()}",
+                                            style: TextStyle(
+                                                fontSize: 18.sp,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          // Text(snapshot
+                                          //     .data!
+                                          //     .extendedIngredients![index]
+                                          //     .unit!
+                                          //     .toString())
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                              // const Divider(
+                              //   thickness: 7.0,
+                              //   color: Color.fromARGB(255, 239, 232, 232),
+                              //   //  indent: 16,
+                              //   //endIndent: 16,
+                              // ),
+                              Recipelables(title: "Instructions"),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 10.0, top: 8, right: 6, bottom: 6),
+                                    left: 10.0, top: 6, right: 6, bottom: 6),
                                 child: Text(
                                   RemoveHtmlTags(
                                     snapshot.data!.instructions!,
@@ -340,24 +329,13 @@ class RecipeScreen extends StatelessWidget {
                                   // maxLines: 4,
                                   //overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
-                              const Divider(
-                                thickness: 7.0,
-                                color: Color.fromARGB(255, 239, 232, 232),
-                                //  indent: 16,
-                                //endIndent: 16,
-                              ),
-                              const Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 8.0, top: 8.0),
-                                child: Text("Summary",
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold)),
-                              ),
+
+                              Recipelables(title: "Summary"),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     left: 10.0, top: 8, right: 6, bottom: 6),
@@ -368,17 +346,19 @@ class RecipeScreen extends StatelessWidget {
                                   maxLines: 5,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
                             ],
-                          );
-                        } else {
-                          return CircularProgressIndicator();
-                        }
-                      }),
-                )));
+                          ),
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    })),
+          );
   }
 
   String RemoveHtmlTags(String htmlTags) {
@@ -390,44 +370,5 @@ class RecipeScreen extends StatelessWidget {
 //     String parsedstring = doc.documentElement!.text;
 //   }
     return parsedstring;
-  }
-}
-
-class CustomprogressIndicator extends StatelessWidget {
-  final String? percent;
-  final String? title;
-  final Color? ProgressColor;
-  final Color? LoadingColor;
-  const CustomprogressIndicator({
-    required this.percent,
-    required this.title,
-    required this.ProgressColor,
-    required this.LoadingColor,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CircularPercentIndicator(
-          radius: 30,
-          lineWidth: 12,
-          percent: 0.8,
-          progressColor: ProgressColor!,
-          circularStrokeCap: CircularStrokeCap.round,
-          backgroundColor: LoadingColor!,
-          center: new Text(
-            percent!,
-            style: TextStyle(fontSize: 13),
-          ),
-          animation: true,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(title!),
-        )
-      ],
-    );
   }
 }

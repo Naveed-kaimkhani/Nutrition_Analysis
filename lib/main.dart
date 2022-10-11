@@ -1,15 +1,17 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:nutritionanalysis/Components/RecipeItem.dart';
+import 'package:nutritionanalysis/Constant/globlevariables.dart';
 import 'package:nutritionanalysis/Screens/HomeScreen.dart';
+import 'package:nutritionanalysis/Screens/RecipeScreen.dart';
 import 'package:nutritionanalysis/Screens/SearchRecipes.dart';
-import 'package:nutritionanalysis/Screens/authScreens/SignIn.dart';
-import 'package:nutritionanalysis/Services/authentication_methods.dart';
+import 'package:nutritionanalysis/Screens/Search_By_Recipes.dart';
+import 'package:nutritionanalysis/Screens/Search_Screen.dart';
+import 'package:nutritionanalysis/Screens/Search_by_foodItem.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Screens/authScreens/SignUp.dart';
 import 'Services/DbHelper.dart';
 import 'Services/UpdateData.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,9 +30,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        home: authentication_methods.hndleAuthState());
+    return ScreenUtilInit(
+        designSize: const Size(390, 844),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return  GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Nutrition Analysis',
+              color: globalVariables.backgroundColor,
+              home:SearchRecipes());
+        });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nutritionanalysis/Screens/Search_Screen.dart';
 
@@ -17,24 +18,30 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  OutlineInputBorder border = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(7),
-    borderSide: const BorderSide(
-      color: Colors.grey,
-      width: 1,
-    ),
-  );
+  // OutlineInputBorder border = OutlineInputBorder(
+  //   borderRadius: BorderRadius.circular(7),
+  //   borderSide: const BorderSide(
+  //     color: Colors.grey,
+  //     width: 1,
+  //   ),
+  // );
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    // Size screenSize = MediaQuery.of(context).size;
     return Container(
-      height: 80,
-      decoration: const BoxDecoration(
-        color: Colors.grey,
-      ),
+      height: 55.h,
+      width: 270.w,
+      //  color: Colors.white,
+      decoration: BoxDecoration(
+          color: const Color(0xffFFFFFF),
+          border: Border.all(
+            color: const Color.fromARGB(255, 248, 202, 183),
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(10.r)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           hasBackButton
               ? IconButton(
@@ -43,53 +50,41 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
                   },
                   icon: const Icon(
                     Icons.arrow_back,
-                    color: Colors.white,
+                    color: Colors.red,
                     size: 30,
                   ))
               : Container(),
           SizedBox(
-            width: screenSize.width * 0.7,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 8,
-                    spreadRadius: 1,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: TextField(
-                onSubmitted: (String query) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ResultScreen(query: query)));
-                },
-                readOnly: isReadOnly,
-                onTap: () {
-                  if (isReadOnly) {
-                    Get.to(() => Search_Screen());
-                    //Navigator.of(context).pushNamed(AppRoutes.SearchScreen);
-                  }
-                },
-                decoration: InputDecoration(
-                  hintText: "Search for Recipes",
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: border,
-                  focusedBorder: border,
+            height: 30.h,
+            width: 250.w,
+            child: TextField(
+              decoration: InputDecoration(
+                //labelText: 'Enter item name here',
+                hintText: ' Enter item name here',
+                hintStyle: TextStyle(
+                  color: const Color(0xffFFD2BF),
+                  fontSize: 20.sp,
                 ),
+                border: InputBorder.none,
+                // border: OutlineInputBorder(
+                //   borderRadius: BorderRadius.circular(15),
+                // ),
+
+                //   border: OutlineInputBorder(),
               ),
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.mic_none_outlined,
-              size: 30,
-              color: Colors.white,
+              onSubmitted: (String query) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResultScreen(query: query)));
+              },
+              readOnly: isReadOnly,
+              onTap: () {
+                if (isReadOnly) {
+                  Get.to(() => Search_Screen());
+                  //Navigator.of(context).pushNamed(AppRoutes.SearchScreen);
+                }
+              },
             ),
           ),
         ],
