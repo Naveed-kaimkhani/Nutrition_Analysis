@@ -27,7 +27,7 @@ class DbHelper {
         await db.execute('''CREATE TABLE $_tablename(
         id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
         await db.execute('''CREATE TABLE $_todayfoodlist(
-        id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , title String , fat DOUBLE , protein DOUBLE);''');
+        id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , title String , fat DOUBLE , protein DOUBLE , image STRING);''');
         return db.execute('''CREATE TABLE $_lastWeek(
         id INTEGER PRIMARY KEY AUTOINCREMENT, calories DOUBLE , carb DOUBLE , titles String);''');
       });

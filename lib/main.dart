@@ -20,6 +20,7 @@ Future<void> main() async {
   await DbHelper.initDb();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   UpdateData.SetDate();
+  UpdateData.setCalls();
 
   runApp(const MyApp());
 }
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Nutrition Analysis',
               color: globalVariables.backgroundColor,
-              home:SearchRecipes());
+              home:HomeScreen());
         });
   }
 }

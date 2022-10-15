@@ -110,7 +110,7 @@ class _SearchRecipesState extends State<SearchRecipes> {
                                             //     Duration(milliseconds: 1000),
                                             child: TodayListWidget(
                                               recipe: snapshot.data![index],
-                                              index: index,
+                                            /////  index: index,
                                             )))),
                               );
                             });

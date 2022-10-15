@@ -30,7 +30,7 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     // Size screenSize = MediaQuery.of(context).size;
     return Container(
-      height: 55.h,
+      height: 41.h,
       width: 270.w,
       //  color: Colors.white,
       decoration: BoxDecoration(

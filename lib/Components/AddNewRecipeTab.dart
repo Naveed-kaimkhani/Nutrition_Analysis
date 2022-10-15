@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,20 +5,19 @@ class AddNewRecipeTab extends StatelessWidget {
   final Color? color;
   final String? url;
   final String? text;
-  
+
   const AddNewRecipeTab({
     Key? key,
     required this.color,
     required this.url,
     required this.text,
-    
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 102,
-      height: 115,
+      width: 102.w,
+      height: 115.h,
       decoration: BoxDecoration(
           color: color,
           //border: Border.all(width: 10,color: Colors.red[300],),
@@ -29,7 +27,11 @@ class AddNewRecipeTab extends StatelessWidget {
         //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //  SvgPicture.asset(url!),
-          Image.asset(url!),
+          Image.asset(
+            url!,
+            height: 35.h,
+            width: 35.w,
+          ),
           SizedBox(
             height: 13.h,
           ),
@@ -38,7 +40,7 @@ class AddNewRecipeTab extends StatelessWidget {
             child: Text(
               text!,
               style: TextStyle(
-                fontSize: 20.sp,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
               ),

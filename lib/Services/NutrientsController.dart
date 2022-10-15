@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:nutritionanalysis/model/NutrientsModel.dart';
 import 'package:nutritionanalysis/model/TodaysListFoodModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'DbHelper.dart';
 
@@ -13,9 +14,10 @@ class NutrientsController extends GetxController {
 
   dynamic caloriess = 0;
   dynamic carbss = 0;
+  dynamic apiCalls=20;
   dynamic titless = <String>[];
   static var NutritionList = <NutrientsModel>[].obs;
-  static var todayList = <TodaysListFoodModel>[];
+  var todayList = <TodaysListFoodModel>[];
 
   Future<int?> addNutrition({NutrientsModel? nutrients}) async {
     // pending_task.add(Task!);
@@ -65,29 +67,18 @@ Future<int?> addToTodayList({TodaysListFoodModel? model}) async {
       // print("cal me $caloriess");
       update();
     }
-    await getTodaysTitles();
+    todayList= await getTodayFoodList();
+    update();
+    // await getTodaysTitles();
     // print("get nutrients done");
   }
 
-  void getTodayFoodList() async {
+  Future<List<TodaysListFoodModel>> getTodayFoodList() async {
     List<Map<String, dynamic>> TodaysListFood = await DbHelper.query("todayfoodlist");
   //  print(Nutrients);
     todayList.assignAll(
         TodaysListFood.map((data) => TodaysListFoodModel.fromJson(data)).toList());
-    // print(NutritionList);
-    // print(NutritionList.length);
-    // print(NutritionList[0].calories??".....");
-    if (todayList.length != 0) {
-      
-      // // print("in if of getNutrients update wala method");
-      // caloriess = NutritionList[0].calories;
-      // carbss = NutritionList[0].carb;
-      // // print("carbss me $carbss");
-      // // print("cal me $caloriess");
-      // update();
-    }
-    // await getTodaysTitles();
-    // print("get nutrients done");
+    return todayList;
   }
 
   Future<List<String>?> getTodaysTitles() async {
@@ -117,4 +108,25 @@ Future<int?> addToTodayList({TodaysListFoodModel? model}) async {
   //   getTasks();
 
   // }
+
+    getAvailableCalls() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+    // String currentDate = DateFormat('dd-MM-yyyy').format(now);
+    apiCalls = prefs.getInt("availableCalls");
+    // print(availableCalls);
+    print("in get calls");
+    // yield availableCalls!;
+  }
+     void updateAvailableCalls()async{
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+        int? availableCalls = prefs.getInt("availableCalls");
+  if( availableCalls!=null) --availableCalls;
+  apiCalls=availableCalls;
+    prefs.setInt("availableCalls",apiCalls!);
+    print("remaining calls");
+    print(availableCalls);
+    update();
+
+  }
 }

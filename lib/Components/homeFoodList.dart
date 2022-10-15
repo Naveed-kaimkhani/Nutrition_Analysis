@@ -1,14 +1,15 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../model/Response_Model.dart';
+import '../model/TodaysListFoodModel.dart';
 
-class TodayListWidget extends StatelessWidget {
-  final Results recipe;
+class homeFoodList extends StatelessWidget {
+  final TodaysListFoodModel recipe;
   // final int index;
-  const TodayListWidget({
+  const homeFoodList({
     required this.recipe,
     // required this.index,
     Key? key,
@@ -16,7 +17,7 @@ class TodayListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String calorie = recipe.nutrition!.nutrients![2].amount!.round().toString();
+    String calorie = recipe.calories.toString();
     return Container(
         margin: EdgeInsets.all(8.0),
         height: 154.h,
@@ -76,7 +77,7 @@ class TodayListWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 3.0),
                       child: Text(
-                        ' Calories:  $calorie\n Carbs:      33\n Protein:    33\n  Fat:           43 ',
+                        ' Calories:  $calorie\n Carbs:      ${recipe.carb}\n Protein:    ${recipe.protein}\n  Fat:           ${recipe.protein} ',
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 13.sp,

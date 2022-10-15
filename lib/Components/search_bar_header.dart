@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nutritionanalysis/Constant/globlevariables.dart';
@@ -13,9 +12,9 @@ class search_bar_header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 14.h),
-      height: 260.h,
-      width: 385.w,
+      margin: EdgeInsets.symmetric(horizontal: 13.w, vertical: 13.h),
+      height: 236.h,
+      width: 365.w,
       decoration: BoxDecoration(
         color: globalVariables.greyColor,
         borderRadius: BorderRadius.circular(20.r),
@@ -28,9 +27,9 @@ class search_bar_header extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 37.h),
                 child: Text(
-                  "Find Keto  Recipes",
+                  "Find Keto Recipes",
                   style: TextStyle(
-                    fontSize: 40.sp,
+                    fontSize: 28.sp,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                   ),
@@ -40,8 +39,8 @@ class search_bar_header extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 25.h),
                 child: Image.asset(
                   'lib/asset/recipebook.png',
-                  // height: 120,
-                  // width: 120,
+                  height: 103,
+                  width: 103,
                 ),
               ),
             ],
@@ -65,8 +64,8 @@ class search_bar_header extends StatelessWidget {
               // ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 5.w),
-                height: 55.h,
-                width: 55.w,
+                height: 41.h,
+                width: 41.w,
                 decoration: BoxDecoration(
                   color: const Color(0xffF3AD69),
                   borderRadius: BorderRadius.circular(5.r),

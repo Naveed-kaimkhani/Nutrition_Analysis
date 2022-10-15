@@ -15,7 +15,7 @@ class addsubtract_button extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        height: 50.h,
+        height: 48.h,
         width: 40.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(7),

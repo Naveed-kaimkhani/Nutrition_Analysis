@@ -319,7 +319,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: () {
                   Get.to(() => HomeScreen());
                 },
-                icon: Image.asset('lib/asset/back 1.png'),
+                icon: Image.asset(
+                  'lib/asset/back 1.png',
+                  height: 40.h,
+                  width: 40.w,
+                ),
               )),
       elevation: 0,
       backgroundColor: globalVariables.backgroundColor,

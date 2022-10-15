@@ -3,17 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nutritionanalysis/Components/Button.dart';
+import 'package:nutritionanalysis/Components/homeFoodList.dart';
 import 'package:nutritionanalysis/Constant/globlevariables.dart';
 import 'package:nutritionanalysis/Screens/NoUserFound.dart';
 import 'package:nutritionanalysis/Screens/SearchRecipes.dart';
 import 'package:nutritionanalysis/Screens/Search_By_Recipes.dart';
+import 'package:nutritionanalysis/Screens/restrict_to_apicalls.dart';
+import 'package:nutritionanalysis/Services/DbHelper.dart';
 import 'package:nutritionanalysis/Services/NutrientsController.dart';
+import 'package:nutritionanalysis/model/TodaysListFoodModel.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../Components/TodayListWidget.dart';
 import '../Services/UpdateData.dart';
 import 'RecipeScreen.dart';
 import 'TabBarScreen.dart';
+
+var _Nutrients = Get.put(NutrientsController());
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -23,7 +29,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var _Nutrients = Get.put(NutrientsController());
+// List<TodaysListFoodModel>? todaylist;
 
   @override
   void initState() {
@@ -33,6 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // print("init of homepage");
     //  UpdateData.UpdateValues();
     _Nutrients.getNutrients();
+    // _Nutrients.getAvailableCalls();
+
+    // getRemainingCalls();
   }
 
   @override
@@ -187,43 +196,100 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
                         },
-                        icon: Image.asset('lib/asset/NavigationIcon.png'),
+                        icon: Image.asset(
+                          'lib/asset/NavigationIcon.png',
+                          height: 60.h,
+                          width: 390.w,
+                        ),
                       )),
-              actions: [CircleAvatar(child: Image.asset('lib/asset/man.png'))],
+              actions: [
+                CircleAvatar(
+                    child: Image.asset(
+                  'lib/asset/man.png',
+                  height: 43.h,
+                  width: 33.w,
+                ))
+              ],
               elevation: 0,
               title: Text("Good Morning, John!",
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     //  fontFamily: 'Inter',
-                    fontSize: 30.sp,
+                    fontSize: 22.sp,
                     color: Colors.black,
                   )),
               backgroundColor: globalVariables.backgroundColor,
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 35.h),
+                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 35.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Today's Goal",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18,
-                        fontFamily: 'Inter',
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Today's Goal",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18.sp,
+                            fontFamily: 'Inter',
+                          ),
+                        ),
+
+                        // FutureBuilder(
+                        //     future: UpdateData.getAvailableCalls(),
+                        //     builder: (ctx, AsyncSnapshot<int?> snapshot) {
+                        //       // Checking if future is resolved
+
+                        //       // If we got an error
+                        //       if (snapshot.hasError) {
+                        //         return Center(
+                        //           child: Text(
+                        //             '${snapshot.error} occurred',
+                        //             style: TextStyle(fontSize: 18),
+                        //           ),
+                        //         );
+
+                        //         // if we got our data
+                        //       } else {
+                        //         print(snapshot.data);
+                        //         // Extracting data from snapshot object
+                        //         final data = snapshot.data;
+                        //         return Center(
+                        //           child: Text(
+                        //             'Remaining Calls: $data',
+                        //             style: TextStyle(fontSize: 18),
+                        //           ),
+                        //         );
+                        //       }
+                        //     }),
+
+                        GetBuilder<NutrientsController>(builder: (controller) {
+                          return Text(
+                            // _Nutrients.carbs
+                            // "Carbs: ${double.parse(controller.carbss).round()}",
+                            "Remaining Calls: ${controller.apiCalls}",
+
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        }),
+                      ],
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 10.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 30.0, top: 30),
+                          padding: EdgeInsets.only(left: 30.w, top: 30.h),
                           child: CircularPercentIndicator(
-                            radius: 70,
+                            radius: 70.r,
                             lineWidth: 12,
                             percent: 0.8,
                             progressColor: Color(0xffE56750),
@@ -232,16 +298,29 @@ class _HomeScreenState extends State<HomeScreen> {
                             center: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                new Text(
-                                  "1100",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
-                                ),
+                                // new Text(
+                                //   "1100",
+                                //   style: TextStyle(
+                                //       fontSize: 16,
+                                //       fontWeight: FontWeight.w700),
+                                // ),
+                                GetBuilder<NutrientsController>(
+                                    builder: (controller) {
+                                  return Text(
+                                    // _Nutrients.carbs
+                                    "${controller.caloriess}",
+
+                                    //"Calories: ${double.parse(controller.caloriess).round().toString()}",
+                                    style: TextStyle(
+                                      fontSize: 22.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                }),
                                 new Text(
                                   "Calories",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.w400),
                                 ),
                               ],
@@ -250,9 +329,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 30.0, top: 30),
+                          padding: EdgeInsets.only(left: 30.w, top: 30.h),
                           child: CircularPercentIndicator(
-                            radius: 60,
+                            radius: 60.r,
                             lineWidth: 12,
                             percent: 0.8,
                             // strokeWidth: 5,
@@ -263,16 +342,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             center: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                new Text(
-                                  "1100",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
-                                ),
+                                GetBuilder<NutrientsController>(
+                                    builder: (controller) {
+                                  return Text(
+                                    // _Nutrients.carbs
+                                    "${controller.carbss}",
+
+                                    //"Calories: ${double.parse(controller.caloriess).round().toString()}",
+                                    style: TextStyle(
+                                      fontSize: 22.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                }),
                                 new Text(
                                   "Carbs",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.w400),
                                 ),
                               ],
@@ -285,11 +371,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 29.h,
                     ),
-                    const Text(
+                    Text(
                       "Keep doing great",
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontFamily: 'Inter',
                       ),
                     ),
@@ -309,61 +395,64 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 24.h,
                     ),
-                    const Text(
+                    Text(
                       "Today's Food",
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontFamily: 'Inter',
                       ),
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
-                    ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Dismissible(
-                              key: Key(index.toString()),
-                              background: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.red,
-                                ),
-                                child: const Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Icon(
-                                    Icons.delete,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              secondaryBackground: Container(
-                                decoration: BoxDecoration(
+                    GetBuilder<NutrientsController>(builder: (controller) {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: _Nutrients.todayList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Dismissible(
+                                key: Key(index.toString()),
+                                background: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
                                     color: Colors.red,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 12.0),
+                                  ),
+                                  child: const Align(
+                                    alignment: Alignment.centerRight,
                                     child: Icon(
                                       Icons.delete,
                                       color: Colors.white,
-                                      size: 32,
                                     ),
                                   ),
                                 ),
+                                secondaryBackground: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: 12.w),
+                                      child: Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 32,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                child: homeFoodList(
+                                    recipe: _Nutrients.todayList[index]),
+                                // child: Container(),
+                                onDismissed: (direction) {},
                               ),
-                              //child: TodayListWidget(),
-                              child: Container(),
-                              onDismissed: (direction) {},
-                            ),
-                          );
-                        }),
+                            );
+                          });
+                    })
                   ],
                 ),
               ),
@@ -373,13 +462,13 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  const DrawerHeader(
+                  DrawerHeader(
                     decoration: BoxDecoration(
                       color: Colors.green,
                     ),
                     child: Text(
                       'Navigation Drawer',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20.sp),
                     ),
                   ),
                   ListTile(
@@ -403,39 +492,43 @@ class SearchRecipeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // padding: EdgeInsets.only(left: 10, top: 10),
-      margin: EdgeInsets.only(left: 10, top: 10),
-      width: 159,
-      height: 206,
-      decoration: BoxDecoration(
-          color: Color(0xff351F2B),
-          //border: Border.all(width: 10,color: Colors.red[300],),
-          borderRadius: BorderRadius.circular(18)),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 26.h),
-            child: Text(
-              "Find Recipes",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
+    return GestureDetector(
+        child: Container(
+          // padding: EdgeInsets.only(left: 10, top: 10),
+          margin: EdgeInsets.only(left: 10.w, top: 10.h),
+          width: 159.w,
+          height: 206.h,
+          decoration: BoxDecoration(
+              color: Color(0xff351F2B),
+              //border: Border.all(width: 10,color: Colors.red[300],),
+              borderRadius: BorderRadius.circular(18.r)),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 26.h),
+                child: Text(
+                  "Find Recipes",
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: EdgeInsets.only(left: 49.w, top: 5.h),
+                child: Image.asset(
+                  'lib/asset/recipe.png',
+                  height: 110.h,
+                  width: 110.w,
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 49.w, top: 5.h),
-            child: Image.asset(
-              'lib/asset/recipe.png',
-              height: 110.h,
-              width: 110.w,
-            ),
-          ),
-        ],
-      ),
-    );
+        ),
+        onTap: () {
+          Get.to(() => SearchRecipes());
+        });
   }
 }
 
@@ -446,39 +539,46 @@ class AddItemButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // padding: EdgeInsets.only(left: 10, top: 10),
-      margin: const EdgeInsets.only(left: 10, top: 10),
-      width: 159,
-      height: 206,
-      decoration: BoxDecoration(
-          color: const Color(0xffE56750),
-          //border: Border.all(width: 10,color: Colors.red[300],),
-          borderRadius: BorderRadius.circular(18)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 26.h),
-            child: Text(
-              "Add New Item",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
+    return GestureDetector(
+      child: Container(
+        // padding: EdgeInsets.only(left: 10, top: 10),
+        margin: EdgeInsets.only(left: 10.w, top: 10.h),
+        width: 159.w,
+        height: 206.h,
+        decoration: BoxDecoration(
+            color: const Color(0xffE56750),
+            //border: Border.all(width: 10,color: Colors.red[300],),
+            borderRadius: BorderRadius.circular(18.r)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 10.h),
+              child: Text(
+                "Add New Item",
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 49.w),
-            child: Image.asset(
-              'lib/asset/list.png',
-              height: 110.h,
-              width: 110.w,
+            Padding(
+              padding: EdgeInsets.only(left: 49.w),
+              child: Image.asset(
+                'lib/asset/list.png',
+                height: 136.h,
+                width: 136.w,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      onTap: () {
+        _Nutrients.apiCalls >= 1
+            ? Get.to(() => Search_By_Recipes())
+            : Get.to(() => restrict_to_apicalls());
+      },
     );
   }
 }

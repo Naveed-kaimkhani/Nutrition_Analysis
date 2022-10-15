@@ -1,6 +1,7 @@
 class TodaysListFoodModel{
     int? id;
   String? title;
+  String? image;
   double? calories;
   double? carb;
   double? fat;
@@ -14,6 +15,7 @@ class TodaysListFoodModel{
   this.title,
    this.fat,
    this.protein,
+   this.image
   });
 
  factory TodaysListFoodModel.fromJson(Map<String,dynamic> json){
@@ -24,7 +26,8 @@ class TodaysListFoodModel{
         carb: json['carb'],
         title: json['title'],
         fat: json['fat'],
-        protein: json['protein']
+        protein: json['protein'],
+        image: json['image']
 
       );
     
@@ -38,6 +41,7 @@ class TodaysListFoodModel{
   map['protein']=model.protein;
   map['title']=model.title;
   map['fat']=model.fat;
+  map['image']=model.image;
   
  return map;
   }

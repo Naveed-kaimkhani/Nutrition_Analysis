@@ -9,6 +9,7 @@ import 'DbHelper.dart';
 class UpdateData {
   static var _Nutrients = Get.put(NutrientsController());
 
+
   static void SetDate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -18,7 +19,42 @@ class UpdateData {
     prefs.setString("currentDate", currentDate);
     // print("date seted");
   }
+static void setCalls() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    String currentDate = getCurrentDate();
+    String? storedDate = prefs.getString("currentDate");
+  
+    if(currentDate!=storedDate){
+        prefs.setInt("availableCalls",20);
+    }
+  // int? cl=    await UpdateData.getAvailableCalls();
+  print("calls set");
+  // print(cl);
+    // if(currentDate!=storedDate){
+
+    // }
+    // print("date seted");
+  }
+  
+  // static Stream<int>? getAvailableCalls() async*{
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+  //   // String currentDate = DateFormat('dd-MM-yyyy').format(now);
+  //   int? availableCalls = prefs.getInt("availableCalls");
+  //   print(availableCalls);
+  //   print("in get calls");
+  //   yield availableCalls!;
+  // }
+  // static void updateAvailableCalls()async{
+  //      SharedPreferences prefs = await SharedPreferences.getInstance();
+  //       int? availableCalls = prefs.getInt("availableCalls");
+  // if( availableCalls!=null) --availableCalls;
+  //   prefs.setInt("availableCalls",availableCalls!);
+  //   print("remaining calls");
+  //   print(availableCalls);
+
+  // }
   static String getCurrentDate() {
     //SharedPreferences prefs = await SharedPreferences.getInstance();
     final now = DateTime.now();
