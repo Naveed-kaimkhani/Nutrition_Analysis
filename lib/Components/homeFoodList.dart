@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -17,10 +16,10 @@ class homeFoodList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String calorie = recipe.calories.toString();
+    // String calorie = recipe.calories.toString();
     return Container(
-        margin: EdgeInsets.all(8.0),
-        height: 154.h,
+        // margin: EdgeInsets.all(2.0),
+        height: 136.h,
         width: 362.w,
         decoration: BoxDecoration(
           color: Color(0xffFFFFFF),
@@ -42,14 +41,14 @@ class homeFoodList extends StatelessWidget {
           ],
         ),
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
+            padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 20.h),
             child: Row(children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(110.r),
                 child: Image.network(
                   recipe.image!,
-                  height: 88.h,
-                  width: 82.w,
+                  height: 71.h,
+                  width: 69.w,
                 ),
               ),
               Padding(
@@ -61,7 +60,7 @@ class homeFoodList extends StatelessWidget {
                     Text(
                       recipe.title!.substring(0, 12),
                       style: TextStyle(
-                        fontSize: 24.sp,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w700,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -70,17 +69,17 @@ class homeFoodList extends StatelessWidget {
                     Text(
                       "Quantity: 1 Serving",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 3.0),
                       child: Text(
-                        ' Calories:  $calorie\n Carbs:      ${recipe.carb}\n Protein:    ${recipe.protein}\n  Fat:           ${recipe.protein} ',
+                        ' Calories:  ${recipe.calories!.round()}\n Carbs:      ${recipe.carb!.round()}\n Protein:    ${recipe.protein!.round()}\n  Fat:           ${recipe.protein!.round()} ',
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 13.sp,
+                            fontSize: 10.sp,
                             color: Colors.black),
                       ),
                     )
@@ -104,14 +103,14 @@ class homeFoodList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     new Text(
-                      calorie,
+                      recipe.calories!.round().toString(),
                       style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w700),
+                          fontSize: 14.sp, fontWeight: FontWeight.w700),
                     ),
                     new Text(
                       "Calories",
-                      style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w700),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),

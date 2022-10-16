@@ -92,9 +92,24 @@ static Future<int?> insertToTodayList(
     return res;
   }
 
-  // static delete(task t) async {
-  //   await db!.delete(_tablename, where: 'id=?', whereArgs: [t.id]);
-  // }
+  static Future<int> removeValues(double calories, double carb) {
+  //   print(_Nutrients.caloriess);
+  //   print(_Nutrients.caloriess-=calories);
+  //   print(_Nutrients.carbss);
+  // print(  _Nutrients.carbss-=carb);
+  //   _Nutrients.caloriess-=calories;
+  //   _Nutrients.carbss-=carb;
+    var res = db!.update(
+        _tablename, {"calories": _Nutrients.caloriess-=calories, "carb": _Nutrients.carbss-=carb, "titles": ""},
+        where: "id = ?", whereArgs: [1]);
+    //  NutrientsController controller=NutrientsController();
+    _Nutrients.getNutrients();
+    return res;
+  }
+  static Future<void> delete(TodaysListFoodModel food) async {
+    
+    await db!.delete(_todayfoodlist, where: 'id=?', whereArgs: [food.id]);
+  }
 
 //   static update(int id) async {
 //     return await db!.rawUpdate('''

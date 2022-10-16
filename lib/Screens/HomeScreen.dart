@@ -410,12 +410,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       return ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: _Nutrients.todayList.length,
+                          itemCount: controller.todayList.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: Dismissible(
-                                key: Key(index.toString()),
+                                key: Key( controller.todayList[index].id.toString()),
                                 background: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -437,7 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     alignment: Alignment.centerRight,
                                     child: Padding(
                                       padding: EdgeInsets.only(right: 12.w),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.delete,
                                         color: Colors.white,
                                         size: 32,
@@ -445,10 +445,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                 ),
+
+                                // child: Container(),
+                                direction: DismissDirection.endToStart,
+
+                                onDismissed: (direction) async{
+                                  print(_Nutrients.todayList[index]);
+                               await   DbHelper.removeValues(
+                                       controller.todayList[index].calories!,
+                                       controller.todayList[index].carb!);
+                                       setState(() {
+                                            controller.todayList.remove(controller.todayList[index]);
+                          });
+                                      // controller.updateTodayList( controller.todayList[index]);
+
+                                      
+                                },
                                 child: homeFoodList(
                                     recipe: _Nutrients.todayList[index]),
-                                // child: Container(),
-                                onDismissed: (direction) {},
                               ),
                             );
                           });

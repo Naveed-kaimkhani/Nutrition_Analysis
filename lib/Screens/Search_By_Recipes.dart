@@ -262,7 +262,7 @@ class _Search_By_RecipesState extends State<Search_By_Recipes> {
                               suggestion.nutrition!.nutrients;
                           _todayslistfoodmodel.protein = nutrients![0].amount!;
                           _todayslistfoodmodel.fat = nutrients[1].amount!;
-                          _todayslistfoodmodel.carb = nutrients[2].amount!;
+
                           _todayslistfoodmodel.title = suggestion.title;
                           _todayslistfoodmodel.image = suggestion.image;
 
@@ -277,7 +277,7 @@ class _Search_By_RecipesState extends State<Search_By_Recipes> {
 
                           _todayslistfoodmodel.calories = (rc.calories!.value! *
                               int.parse(qController.text));
-
+                          _todayslistfoodmodel.carb = rc.carbs!.value;
                           _model.calories = (rc.calories!.value! *
                               int.parse(qController.text));
                           //print(_model.calories);
@@ -289,8 +289,7 @@ class _Search_By_RecipesState extends State<Search_By_Recipes> {
                           await _Nutrients.addNutrition(nutrients: _model);
                           _Nutrients.getNutrients();
                           // await _Nutrients.getTodaysTitles();
-                          Fluttertoast.showToast(
-                              msg: "${suggestion.title} added");
+                          _Nutrients.updateAvailableCalls();
                           // print("get function called after add");
                           // print(rc);
                           // print("protein: ${protein.toString()}");
@@ -300,7 +299,8 @@ class _Search_By_RecipesState extends State<Search_By_Recipes> {
                           //  UpdateData.updateAvailableCalls();
                           await DbHelper.insertToTodayList(
                               _todayslistfoodmodel, "todayfoodlist");
-                          _Nutrients.updateAvailableCalls();
+                          Fluttertoast.showToast(
+                              msg: "${suggestion.title} added");
                         },
                         noItemsFoundBuilder: (context) => const Center(
                           child: Text("No Meal Found"),

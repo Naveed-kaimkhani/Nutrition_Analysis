@@ -14,7 +14,7 @@ class NutrientsController extends GetxController {
 
   dynamic caloriess = 0;
   dynamic carbss = 0;
-  dynamic apiCalls=20;
+  dynamic apiCalls = 20;
   dynamic titless = <String>[];
   static var NutritionList = <NutrientsModel>[].obs;
   var todayList = <TodaysListFoodModel>[];
@@ -36,7 +36,8 @@ class NutrientsController extends GetxController {
       return await DbHelper.insert(nutrients, "Nutrients");
     }
   }
-Future<int?> addToTodayList({TodaysListFoodModel? model}) async {
+
+  Future<int?> addToTodayList({TodaysListFoodModel? model}) async {
     // pending_task.add(Task!);
     // print("task length is " + tasklist.length.toString());
     // List<Map<String, dynamic>> Nutrientss = await DbHelper.query();
@@ -45,15 +46,16 @@ Future<int?> addToTodayList({TodaysListFoodModel? model}) async {
     // print(Nutrientss);
     //print("in add nutrition");
     // print(Nutrientss.isNotEmpty);
-    
+
     return await DbHelper.insertToTodayList(model, "todayfoodlist");
   }
+
   // void updateIndex(dynamic index){
   //   currentIndex=index;
   // }
   void getNutrients() async {
     List<Map<String, dynamic>> Nutrients = await DbHelper.query("Nutrients");
-  //  print(Nutrients);
+    //  print(Nutrients);
     NutritionList.assignAll(
         Nutrients.map((data) => new NutrientsModel.fromJson(data)).toList());
     // print(NutritionList);
@@ -67,17 +69,26 @@ Future<int?> addToTodayList({TodaysListFoodModel? model}) async {
       // print("cal me $caloriess");
       update();
     }
-    todayList= await getTodayFoodList();
+    todayList = await getTodayFoodList();
     update();
     // await getTodaysTitles();
     // print("get nutrients done");
   }
+  void updateTodayList(TodaysListFoodModel recipe)async{
+  await  DbHelper.delete(recipe);
+    todayList.remove(recipe);
+    print(todayList.length);
+   todayList=await getTodayFoodList();
+    update();
+  }
 
   Future<List<TodaysListFoodModel>> getTodayFoodList() async {
-    List<Map<String, dynamic>> TodaysListFood = await DbHelper.query("todayfoodlist");
-  //  print(Nutrients);
+    List<Map<String, dynamic>> TodaysListFood =
+        await DbHelper.query("todayfoodlist");
+    //  print(Nutrients);
     todayList.assignAll(
-        TodaysListFood.map((data) => TodaysListFoodModel.fromJson(data)).toList());
+        TodaysListFood.map((data) => TodaysListFoodModel.fromJson(data))
+            .toList());
     return todayList;
   }
 
@@ -109,24 +120,25 @@ Future<int?> addToTodayList({TodaysListFoodModel? model}) async {
 
   // }
 
-    getAvailableCalls() async{
+  getAvailableCalls() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    
+
     // String currentDate = DateFormat('dd-MM-yyyy').format(now);
     apiCalls = prefs.getInt("availableCalls");
     // print(availableCalls);
     print("in get calls");
     // yield availableCalls!;
   }
-     void updateAvailableCalls()async{
-       SharedPreferences prefs = await SharedPreferences.getInstance();
-        int? availableCalls = prefs.getInt("availableCalls");
-  if( availableCalls!=null) --availableCalls;
-  apiCalls=availableCalls;
-    prefs.setInt("availableCalls",apiCalls!);
-    print("remaining calls");
-    print(availableCalls);
-    update();
 
+  void updateAvailableCalls() async {
+    //  SharedPreferences prefs = await SharedPreferences.getInstance();
+    //       int? availableCalls = prefs.getInt("availableCalls");
+    // if( availableCalls!=null) --availableCalls;
+    // apiCalls=availableCalls;
+    //   prefs.setInt("availableCalls",apiCalls!);
+    //   print("remaining calls");
+    //   print(availableCalls);
+    --apiCalls;
+    update();
   }
 }
