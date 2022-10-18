@@ -14,7 +14,6 @@ class NutrientsController extends GetxController {
   dynamic caloriess = 0;
   dynamic carbss = 0;
   dynamic apiCalls = 20;
-  dynamic titless = <String>[];
   static var NutritionList = <NutrientsModel>[].obs;
   var todayList = <TodaysListFoodModel>[];
 
@@ -65,23 +64,6 @@ class NutrientsController extends GetxController {
     return todayList;
   }
 
-  Future<List<String>?> getTodaysTitles() async {
-    List<Map<String, dynamic>> Nutrients = await DbHelper.query("Nutrients");
-    List<NutrientsModel> NutritionListTitles;
-    NutritionList.assignAll(
-        Nutrients.map((data) => new NutrientsModel.fromJson(data)).toList());
-    int lenght = NutritionList.length;
-    // print(lenght);
-    if (lenght == 0) {
-      return [];
-    } else {
-      NutrientsModel model = NutritionList[lenght - 1];
-
-      titless = model.titles;
-      update();
-      return titless;
-    }
-  }
 
   getAvailableCalls() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -111,10 +111,6 @@ void addCustomfood() {
           double.parse(ServingController.text));
       _model.carb = (double.parse(carbController.text) *
           double.parse(ServingController.text));
-      String ti = _Nutrients.titless.toString();
-      List<String> lot = ti.split(',');
-      lot.add(NameController.text);
-      _model.titles = lot;
       await _Nutrients.addNutrition(nutrients: _model);
       _Nutrients.getNutrients();
       Fluttertoast.showToast(msg: "${NameController.text} added");

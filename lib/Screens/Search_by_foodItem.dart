@@ -113,10 +113,7 @@ class _Search_by_foodItemState extends State<Search_by_foodItem> {
                       _model.carb =
                           (nutrnts[6].amount! * int.parse(qController.text));
 
-                      String ti = _Nutrients.titless.toString();
-                      List<String> lot = ti.split(',');
-                      lot.add(suggestion.name!);
-                      _model.titles = lot;
+           
 
                       await _Nutrients.addNutrition(nutrients: _model);
                       Fluttertoast.showToast(msg: "${suggestion.name} added");

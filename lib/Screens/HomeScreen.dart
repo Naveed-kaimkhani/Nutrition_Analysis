@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:nutritionanalysis/Components/Button.dart';
 import 'package:nutritionanalysis/Components/homeFoodList.dart';
 import 'package:nutritionanalysis/Constant/globlevariables.dart';
-import 'package:nutritionanalysis/Screens/NoUserFound.dart';
 import 'package:nutritionanalysis/Screens/SearchRecipes.dart';
 import 'package:nutritionanalysis/Screens/Search_By_Recipes.dart';
 import 'package:nutritionanalysis/Screens/restrict_to_apicalls.dart';
