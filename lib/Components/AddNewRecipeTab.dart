@@ -20,13 +20,10 @@ class AddNewRecipeTab extends StatelessWidget {
       height: 115.h,
       decoration: BoxDecoration(
           color: color,
-          //border: Border.all(width: 10,color: Colors.red[300],),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          //  SvgPicture.asset(url!),
           Image.asset(
             url!,
             height: 35.h,

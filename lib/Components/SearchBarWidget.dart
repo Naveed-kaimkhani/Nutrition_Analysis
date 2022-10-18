@@ -17,15 +17,6 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
 
   @override
   final Size preferredSize;
-
-  // OutlineInputBorder border = OutlineInputBorder(
-  //   borderRadius: BorderRadius.circular(7),
-  //   borderSide: const BorderSide(
-  //     color: Colors.grey,
-  //     width: 1,
-  //   ),
-  // );
-
   @override
   Widget build(BuildContext context) {
     // Size screenSize = MediaQuery.of(context).size;
@@ -66,11 +57,7 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
                   fontSize: 20.sp,
                 ),
                 border: InputBorder.none,
-                // border: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(15),
-                // ),
-
-                //   border: OutlineInputBorder(),
+              
               ),
               onSubmitted: (String query) {
                 Navigator.push(
@@ -82,7 +69,6 @@ class SearchBarWidget extends StatelessWidget with PreferredSizeWidget {
               onTap: () {
                 if (isReadOnly) {
                   Get.to(() => Search_Screen());
-                  //Navigator.of(context).pushNamed(AppRoutes.SearchScreen);
                 }
               },
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:nutritionanalysis/Constant/globlevariables.dart';
 
 class restrict_to_apicalls extends StatelessWidget {
@@ -8,7 +7,7 @@ class restrict_to_apicalls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: globalVariables.backgroundColor,
       body: Center(
         child:Center(

@@ -6,13 +6,9 @@ import 'package:nutritionanalysis/Screens/authScreens/SignIn.dart';
 class authentication_methods {
   static Future<String> SignupUsers(
       {
-        //required String namee,
       required String email,
-      //required String phonee,
       required String password}) async {
-    //namee.trim();
     email.trim();
-    //phonee.trim();
     password.trim();
     String output;
     if (email != "" &&  password != "") {
@@ -23,17 +19,14 @@ class authentication_methods {
           password: password,
         );
         output = "SignUp Successfully";
-        // await Firestore_method.uploadDataToFirestore(
-        //     name: namee, phone: phonee);
+
       } on FirebaseAuthException catch (e) {
         output = e.message.toString();
       }
     } else {
       output = "Please fill all the fields";
-      // return output;
     }
     print("output is $output");
-    // return output as Future<String>;
     return output;
   }
 
@@ -56,10 +49,8 @@ class authentication_methods {
       }
     } else {
       output = "Please fill all the fields";
-      // return output;
     }
-    //print("output is $output");
-    // return output as Future<String>;
+
     return output;
   }
 

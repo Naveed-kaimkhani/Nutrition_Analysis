@@ -7,8 +7,4 @@ class globalVariables {
   static const greyColor = Color(0xff351F2B);
   static const tapedButtonColor = Color(0xffF3AD69);
 
-  
-  //Color(0xffFEF7F4)
-//  static const backgroundColor = Color.fromARGB(255, 250, 234, 234);
-
 }

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class inputfields extends StatelessWidget {
   String? hint_text;
-  // TextInputType keyboardType;
   TextEditingController? controller;
   inputfields({
     required this.hint_text,
@@ -14,7 +13,7 @@ class inputfields extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Container(
-      height: 70.h,
+      height: 55.h,
       width: 326.w,
       //  color: Colors.white,
       decoration: BoxDecoration(
@@ -26,7 +25,6 @@ class inputfields extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.r)),
       // ignore: prefer_const_constructors
       child: TextField(
-        // keyboardType: keyboardType,
         controller: controller,
         cursorColor: Colors.black,
         decoration: InputDecoration(

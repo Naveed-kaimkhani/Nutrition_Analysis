@@ -3,12 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:nutritionanalysis/Constant/globlevariables.dart';
 import 'package:nutritionanalysis/Screens/HomeScreen.dart';
-import 'package:nutritionanalysis/Screens/RecipeScreen.dart';
-import 'package:nutritionanalysis/Screens/SearchRecipes.dart';
-import 'package:nutritionanalysis/Screens/Search_By_Recipes.dart';
-import 'package:nutritionanalysis/Screens/Search_Screen.dart';
-import 'package:nutritionanalysis/Screens/Search_by_foodItem.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'Services/DbHelper.dart';
 import 'Services/UpdateData.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,9 +13,7 @@ Future<void> main() async {
   // print("in main");
   await Firebase.initializeApp();
   await DbHelper.initDb();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
   UpdateData.SetDate();
-  UpdateData.setCalls();
 
   runApp(const MyApp());
 }
@@ -36,11 +29,11 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return  GetMaterialApp(
+          return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Nutrition Analysis',
               color: globalVariables.backgroundColor,
-              home:HomeScreen());
+              home: HomeScreen());
         });
   }
 }

@@ -34,32 +34,7 @@ class addFoodButton extends StatelessWidget {
           ),
         ),
         onTap:func, 
-        // () async {
-          // if (NameController.text != null &&
-          //     caloreisController.text != null &&
-          //     carbController.text != null &&
-          //     ServingController.text != null) {
-          //   () async {
-          //     _model.calories =
-          //         (double.parse(caloreisController.text) *
-          //             double.parse(ServingController.text));
-          //     _model.carb =
-          //         (double.parse(carbController.text) *
-          //             double.parse(ServingController.text));
-          //     String ti = _Nutrients.titless.toString();
-          //     List<String> lot = ti.split(',');
-          //     lot.add(NameController.text);
-          //     _model.titles = lot;
-          //     await _Nutrients.addNutrition(
-          //         nutrients: _model);
-          //     _Nutrients.getNutrients();
-          //     Fluttertoast.showToast(
-          //         msg: "${NameController.text} added");
-          //   };
-          // }
-          // Fluttertoast.showToast(
-          //     msg: "Please fill all the fields");
-        // },
+      
       ),
     );
   }

@@ -30,7 +30,7 @@ class ResultScreen extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
-                      // fontWeight: FontWeight.bold,
+       
                     ),
                   ),
                   TextSpan(
@@ -44,9 +44,7 @@ class ResultScreen extends StatelessWidget {
                 ],
               )),
             ),
-            // SizedBox(
-            //   height: 5.h,
-            // ),
+    
             Expanded(
                 child: FutureBuilder(
                     future: Api_Services.getMealSuggestion(query: query),
@@ -66,7 +64,7 @@ class ResultScreen extends StatelessWidget {
                               );
                             });
                       } else {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                     }))
           ],

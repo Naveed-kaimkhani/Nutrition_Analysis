@@ -56,10 +56,7 @@ class _SignUpState extends State<SignUp> {
                     setState(() {
                       isLoading = false;
                     });
-                    // Get.snackbar("Authentication Response", output,
-                    // colorText: Colors.white,
-                    // snackPosition: SnackPosition.BOTTOM,
-                    // );
+                 
                     Fluttertoast.showToast(msg: output);
                     Get.to(() => SignIn());
                   },

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../model/Response_Model.dart';
@@ -18,11 +17,11 @@ class TodayListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String calorie = recipe.nutrition!.nutrients![2].amount!.round().toString();
     return Container(
-        margin: EdgeInsets.all(8.0),
+        margin: const EdgeInsets.all(8.0),
         height: 154.h,
         width: 362.w,
         decoration: BoxDecoration(
-          color: Color(0xffFFFFFF),
+          color: const Color(0xffFFFFFF),
           //border: Border.all(width: 10,color: Colors.red[300],),
           borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
@@ -60,13 +59,13 @@ class TodayListWidget extends StatelessWidget {
                     Text(
                       recipe.title!.substring(0, 12),
                       style: TextStyle(
-                        fontSize: 24.sp,
+                        fontSize: 22.sp,
                         fontWeight: FontWeight.w700,
                       ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    Text(
+                    const Text(
                       "Quantity: 1 Serving",
                       style: TextStyle(
                         fontSize: 14,
@@ -87,30 +86,30 @@ class TodayListWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 50.w,
+                width: 23.w,
               ),
               CircularPercentIndicator(
-                radius: 45,
+                radius: 45.r,
                 lineWidth: 10,
                 percent: 0.5,
                 // strokeWidth: 5,
 
-                progressColor: Color(0xffF3AD69),
+                progressColor: const Color(0xffF3AD69),
                 circularStrokeCap: CircularStrokeCap.round,
-                backgroundColor: Color(0xffFFE7CF),
+                backgroundColor: const Color(0xffFFE7CF),
                 center: Column(
                   //crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    new Text(
+                     Text(
                       calorie,
-                      style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w700),
+                      style:
+                          const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                     ),
-                    new Text(
+                  const Text(
                       "Calories",
-                      style: TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w700),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),

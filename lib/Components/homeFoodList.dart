@@ -7,23 +7,18 @@ import '../model/TodaysListFoodModel.dart';
 
 class homeFoodList extends StatelessWidget {
   final TodaysListFoodModel recipe;
-  // final int index;
   const homeFoodList({
     required this.recipe,
-    // required this.index,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // String calorie = recipe.calories.toString();
     return Container(
-        // margin: EdgeInsets.all(2.0),
         height: 136.h,
         width: 362.w,
         decoration: BoxDecoration(
           color: Color(0xffFFFFFF),
-          //border: Border.all(width: 10,color: Colors.red[300],),
           borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
             BoxShadow(
@@ -54,7 +49,6 @@ class homeFoodList extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -90,7 +84,7 @@ class homeFoodList extends StatelessWidget {
                 width: 50.w,
               ),
               CircularPercentIndicator(
-                radius: 45,
+                radius: 48.r,
                 lineWidth: 10,
                 percent: 0.5,
                 // strokeWidth: 5,
